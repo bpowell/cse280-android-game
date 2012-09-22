@@ -17,9 +17,11 @@ Open up the project in Eclipse and then go to Run->Debug or press the <F11> key.
 Go to the root directory of the application. To compile the application:
 
 ant debug
+
 To compile and install the application to device:
 
 ant debug install
+
 To compile, install, and run the application:
 
 ant debug install run
