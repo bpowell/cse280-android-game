@@ -68,6 +68,19 @@
     -->
     <import file="custom_rules.xml" optional="true" />
 
+    <!-- Allows the user to run the application on the device via build script -->
+    <target name="run">
+	    <exec executable="adb">
+		    <arg value="shell"/>
+		    <arg value="am"/>
+		    <arg value="start"/>
+		    <arg value="-a"/>
+		    <arg value="android.intent.action.MAIN"/>
+		    <arg value="-n"/>
+		    <arg value="edu.oakland.cse280.bscd/.MainGameActivity"/>
+	    </exec>
+    </target>
+
     <!-- Import the actual build file.
 
          To customize existing targets, there are two options:
