@@ -4,7 +4,7 @@ The main quest / story line written up.
 Does the hero have followers?  
 Are there different classes?  If so what types.  
 An 8bit drawing of the hero. Front back left and right side.  
-Maybe a UI mock up.
+Maybe a UI mock up.  
 **Power point presentation.**  
 
 #By October 2nd:
