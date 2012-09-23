@@ -11,7 +11,7 @@ sdk.dir=/path/to/android-sdk
 
 ##Compile and deploy##
 ###Eclipse###
-Open up the project in Eclipse and then go to Run->Debug or press the <F11> key. This will compile and run the app.
+Open up the project in Eclipse and then go to Run->Debug or press the F11 key. This will compile and run the app.
 
 ###Command Line###
 Go to the root directory of the application. To compile the application:
