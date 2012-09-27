@@ -13,5 +13,6 @@ Main Boss kidnapped the town's people except for the Inn Keeper. Player needs to
 3.  Certain town's people that are saved are merchants that player can buy items from.
 4.  Only weapons for now.
 5.  No magic spells now.
+
 More information will be added as we figure it out.
 
