@@ -10,4 +10,10 @@ public class Hero extends Mobs
 	{
 		super(image, direction, x, y);
 	}
+
+	public void move()
+	{
+		setX_pos(getX_pos()+1);
+		setY_pos(getY_pos()+1);
+	}
 }

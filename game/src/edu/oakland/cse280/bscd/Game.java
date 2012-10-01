@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Camera;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -14,6 +15,7 @@ import android.view.SurfaceView;
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
+	private Camera camera;
 	private Hero hero;
 
 	public Game(Context context)
@@ -22,6 +24,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		getHolder().addCallback(this);
 
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero),0,20,20);
+		camera = new Camera();
 		game_loop = new GameThread(getHolder(), this);
 
 		setFocusable(true);
@@ -54,6 +57,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	protected void onDraw(Canvas canvas)
 	{
 		canvas.drawColor(Color.WHITE);
+
+		camera.save();
+		camera.translate(5f,5f,0f);
+		camera.applyToCanvas(canvas);
+		hero.move();
 		hero.draw(canvas);
 	}
 }
