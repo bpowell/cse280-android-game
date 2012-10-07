@@ -64,6 +64,7 @@ public class Map
 
 			Bitmap tile_sheet = BitmapFactory.decodeResource(context.getResources(), R.drawable.tiles);
 			clip = new ClipTiles(tile_sheet, 1, 4);
+			Log.i("HERPLADDFFHDJK", "SDDhASDHASDHAKSDHAKSDHA");
 
 			int base[][] = new int[MAP_HEIGHT][MAP_WIDTH];
 
@@ -77,7 +78,7 @@ public class Map
 				for(j=0; j<t.length; j++)
 				{
 					//base[i][j] = Integer.parseInt(t[j]);
-					tiles.add(new Tiles(Integer.parseInt(t[j]), j*120, (i-2)*120));
+					tiles.add(new Tiles(Integer.parseInt(t[j]), j*80, (i-2)*80));
 					Log.d("MAP", "Added ");
 				}
 			}

@@ -3,24 +3,26 @@ package edu.oakland.cse280.bscd.entities;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 
+import java.util.ArrayList;
+
 public class Mobs
 {
-	private static int HEIGHT = 50;
-	private static int WIDTH = 50;
+	private static int HEIGHT = 40;
+	private static int WIDTH = 40;
 
-	private Bitmap[] image;
+	private ArrayList<Bitmap> image;
 	private int x_pos;
 	private int y_pos;
 	private int direction;
 
 	public Mobs(Bitmap sheet, int direction, int x, int y)
 	{
-		image = new Bitmap[4];
+		image = new ArrayList<Bitmap>();
 
-		image[0] = Bitmap.createBitmap(sheet,0*WIDTH,0,WIDTH,HEIGHT);
-		image[1] = Bitmap.createBitmap(sheet,1*WIDTH,0,WIDTH,HEIGHT);
-		image[2] = Bitmap.createBitmap(sheet,2*WIDTH,0,WIDTH,HEIGHT);
-		image[3] = Bitmap.createBitmap(sheet,3*WIDTH,0,WIDTH,HEIGHT);
+		image.add(Bitmap.createBitmap(sheet,0*WIDTH,0,WIDTH,HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,1*WIDTH,0,WIDTH,HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,2*WIDTH,0,WIDTH,HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,3*WIDTH,0,WIDTH,HEIGHT));
 		this.direction = direction;
 		this.x_pos = x;
 		this.y_pos = y;
@@ -48,7 +50,7 @@ public class Mobs
 
 	public void draw(Canvas canvas)
 	{
-		Bitmap b = image[direction];
+		Bitmap b = image.get(direction);
 		canvas.drawBitmap(b, x_pos , y_pos , null);
 	}
 
@@ -60,15 +62,5 @@ public class Mobs
 	public void setDirection(int  direction)
 	{
 		this.direction = direction;
-	}
-
-	public Bitmap[] getImage()
-	{
-		return this.image;
-	}
-
-	public void setImage(Bitmap[]  image)
-	{
-		this.image = image;
 	}
 }

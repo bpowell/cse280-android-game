@@ -2,6 +2,7 @@ package edu.oakland.cse280.bscd.models;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -14,9 +15,11 @@ public class ClipTiles
 
 	public ClipTiles(Bitmap sheet, int rows, int cols)
 	{
-		TILE_WIDTH = 120;
-		TILE_HEIGHT = 120;
+		TILE_WIDTH = 80;
+		TILE_HEIGHT = 80;
 		cliptiles = new ArrayList<Bitmap>();
+
+		Log.i("HSDHASKDHASKDHASKDHASKDHA", "SIZE OF sheet: " + sheet.getHeight() + " " + sheet.getWidth());
 
 		int i, j;
 		for(i=0;i<rows;i++)
