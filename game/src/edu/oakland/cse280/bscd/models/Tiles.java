@@ -4,29 +4,29 @@ import android.graphics.Bitmap;
 
 public class Tiles
 {
-	int tile_type;
-	Bitmap image;
-	int is_passable;
+	private int tile_type;
+	private int x;
+	private int y;
 
 	public int getTile_type()
 	{
 		return this.tile_type;
 	}
 
-	public Bitmap getImage()
+	public int getX()
 	{
-		return this.image;
+		return this.x;
 	}
 
-	public int getIs_passable()
+	public int getY()
 	{
-		return this.is_passable;
+		return this.y;
 	}
 
-	public Tiles(Bitmap image, int tile_type, int is_passable)
+	public Tiles(int tile_type, int x, int y)
 	{
-		this.image = image;
 		this.tile_type = tile_type;
-		this.is_passable = is_passable;
+		this.x = x;
+		this.y = y;
 	}
 }

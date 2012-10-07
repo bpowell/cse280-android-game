@@ -1,8 +1,11 @@
 package edu.oakland.cse280.bscd;
 
 import edu.oakland.cse280.bscd.entities.Hero;
+import edu.oakland.cse280.bscd.models.Map;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Camera;
@@ -15,16 +18,18 @@ import android.view.SurfaceView;
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
-	private Camera camera;
 	private Hero hero;
+	private Map map;
 
 	public Game(Context context)
 	{
 		super(context);
 		getHolder().addCallback(this);
 
+		AssetManager assetMan = context.getAssets();
+		map = new Map(context, assetMan, "map01.txt", 0, 0);
+
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero),0,20,20);
-		camera = new Camera();
 		game_loop = new GameThread(getHolder(), this);
 
 		setFocusable(true);
@@ -58,10 +63,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	{
 		canvas.drawColor(Color.WHITE);
 
-		camera.save();
-		camera.translate(5f,5f,0f);
-		camera.applyToCanvas(canvas);
+		//Camera camera = new Camera();
+		//camera.translate(-(float)hero.getY_pos()/2+10, (float)hero.getX_pos()/2+10, 0.0f);
+		//camera.applyToCanvas(canvas);
+		int h = canvas.getHeight();
+		int w = canvas.getWidth();
+		canvas.translate(-(hero.getX_pos()-w/2), -(hero.getY_pos()-h/2));
 		hero.move();
+		map.draw(canvas);
 		hero.draw(canvas);
 	}
 }
