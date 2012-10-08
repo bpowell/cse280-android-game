@@ -2,69 +2,67 @@ package edu.oakland.cse280.bscd;
 
 import java.util.ArrayList;
 import edu.oakland.cse280.bscd.InventoryItem;
+import java.util.Iterator;
 
 public class Inventory
 {
-    private final int MAX_SIZE = 300;
-    private ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
+    ArrayList<InventoryItem> items = new ArrayList<InventoryItem>();
 
-    public boolean add(int i)
+    public void addItem(int id, int c)
     {
-        if(!isFull())
-//            if(items.contains(i))
-//            {
-//                int j = items.indexOf(i);
-//                return  items[j].setCount(1);
-//            }
-//            else
-                return items.add(new InventoryItem(i));
-        else
-            return false;
-    }
-
-    public ArrayList<String> search(int i)
-    {
-        ArrayList<String> itemList = new ArrayList<String>();
-        if(i==1)
+        Iterator it = items.iterator();
+        InventoryItem item = new InventoryItem();
+        boolean added = false;
+        while(it.hasNext())
         {
-            for (int j=0;j<items.size() ;j++ )
+            item = (InventoryItem) it.next();
+            if (id == item.getItemID())
             {
-                if(items.get(i).getItemType() > 0 && items.get(i).getItemType() <= 100)
-                    itemList.add(items.get(j).getCount() + " " + items.get(j).getName());
+                item.setCount(item.getCount() + c);
+                added = true;
             }
         }
-        else if (i==2)
-        {
-            for (int j = 0; j<items.size(); j++ )
-            {
-                if(items.get(j).getItemType() > 100 && items.get(j).getItemType() <= 200)
-                    itemList.add(items.get(j).getCount() + " " + items.get(j).getName());
-            }
-        }
-        else if (i==3)
-        {
-            for (int j = 0; j<items.size(); j++ )
-            {
-                if(items.get(j).getItemType() > 200 && items.get(j).getItemType() <= 300)
-                    itemList.add(items.get(j).getCount() + " " +items.get(j).getName());
-            }
-        }
-
-        return itemList;
+        if(!added)
+            items.add(new InventoryItem(id,c));
     }
 
-    public boolean isFull()
+    public InventoryItem search(int id)
     {
-        return items.size() == MAX_SIZE;
+        Iterator it = items.iterator();
+        InventoryItem item = new InventoryItem();
+        if (it.hasNext())
+        {
+            while(it.hasNext())
+            {
+                item = (InventoryItem) it.next();
+                if(id==item.getItemID())
+                    return item;
+            }
+            return item;
+
+        }
+        else return item;
+
     }
 
-  //  public boolean remove(int i)
-  //  {
-  //      if(items.contains(i) && items.indexOf(i).getCount() > 1)
-  //         return  items.indexOf(i).setCount(-1);
-  //      else if(items.contains(i) && items.indexOf(i).getCount() == 1)
-  //         return  items.remove(i);
-  //      else
-  //          return false;
-  //  }
+    public ArrayList getItemType(int type)//type 1=weapons
+    {
+        ArrayList return_item_list = new ArrayList();
+        Iterator it = items.iterator();
+        InventoryItem item = new InventoryItem();
+        while(it.hasNext())
+        {
+            item = (InventoryItem) it.next();
+            int id = item.getItemID();
+            if(id>(type*100-100) && id<=(type*100))
+                return_item_list.add(id);
+        }
+
+        return return_item_list;
+    }
+
+
 }
+
+
+
