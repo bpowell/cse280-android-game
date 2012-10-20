@@ -2,6 +2,8 @@ package edu.oakland.cse280.bscd;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 
 public class MainGameActivity extends Activity
 {
