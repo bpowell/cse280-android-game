@@ -13,8 +13,9 @@ public final class R {
     public static final class drawable {
         public static final int back=0x7f020000;
         public static final int front=0x7f020001;
-        public static final int left=0x7f020002;
-        public static final int right=0x7f020003;
+        public static final int hero=0x7f020002;
+        public static final int left=0x7f020003;
+        public static final int right=0x7f020004;
     }
     public static final class layout {
         public static final int main=0x7f030000;

@@ -1,8 +1,13 @@
 package edu.oakland.cse280.bscd;
 
+import edu.oakland.cse280.bscd.graphics.entities.Hero;
+
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
@@ -11,7 +16,7 @@ import android.view.SurfaceView;
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
-	//private Hero hero;
+	private Hero hero;
 	//private Map map;
 
 	private Context context;
@@ -19,7 +24,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	public Game(Context context)
 	{
 		super(context);
+		getHolder().addCallback(this);
+
 		this.context = context;
+
+		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(20,20,0,0));
+		setFocusable(true);
 	}
 
 	@Override
@@ -66,5 +76,11 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	protected void onDraw(Canvas canvas)
 	{
+		if(game_loop.getRunning()==false)
+			return;
+
+		canvas.drawColor(Color.WHITE);
+
+		hero.draw(canvas);
 	}
 }

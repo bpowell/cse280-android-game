@@ -33,7 +33,7 @@ public class Mobs
 		return location;
 	}
 
-	public setLocation(Rect location)
+	public void setLocation(Rect location)
 	{
 		this.location = location;
 	}
