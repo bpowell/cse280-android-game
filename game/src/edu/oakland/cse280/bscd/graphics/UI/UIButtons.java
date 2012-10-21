@@ -70,7 +70,7 @@ public class UIButtons
 
 	public Rect getAbutton_location()
 	{
-		returun a_button_location;
+		return a_button_location;
 	}
 
 	public Rect getBbutton_location()
