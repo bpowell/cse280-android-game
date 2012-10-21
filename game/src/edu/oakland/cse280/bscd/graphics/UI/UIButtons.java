@@ -62,4 +62,19 @@ public class UIButtons
 		b_button_location.bottom = b_button_location.top+60;
 		canvas.drawBitmap(b_button, b_button_location.left, b_button_location.top, opake);
 	}
+
+	public Rect getDpad_location()
+	{
+		return dpad_location;
+	}
+
+	public Rect getAbutton_location()
+	{
+		returun a_button_location;
+	}
+
+	public Rect getBbutton_location()
+	{
+		return b_button_location;
+	}
 }
