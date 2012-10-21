@@ -3,6 +3,7 @@ package edu.oakland.cse280.bscd.graphics.models;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.util.Log;
 
@@ -95,8 +96,26 @@ public class Map
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
 			{
-				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*80, (i-3)*80, 0, 0)));
+				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*80, (i-3)*80, (j*80)+80, ((i-3)*80)+80)));
 			}
+		}
+	}
+
+	public void draw(Canvas canvas)
+	{
+		if(tiles == null)
+			return;
+
+		Rect coords = canvas.getClipBounds();
+
+		for(int i=0; i<tiles.size(); i++)
+		{
+			Tile tile = tiles.get(i);
+
+			Rect location = tile.getLocation();
+
+			if( (location.left>=coords.left) && (location.right<=coords.right) && (location.bottom<=coords.bottom) && (location.top>=coords.top) )
+				clips.draw(canvas, tile);
 		}
 	}
 }

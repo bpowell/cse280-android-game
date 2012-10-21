@@ -83,6 +83,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		canvas.drawColor(Color.WHITE);
 
+		map.draw(canvas);
 		hero.draw(canvas);
 	}
 }
