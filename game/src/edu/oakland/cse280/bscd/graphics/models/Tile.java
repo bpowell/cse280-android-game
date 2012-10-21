@@ -1,6 +1,6 @@
 package edu.oakland.cse280.bscd.graphics.models;
 
-import android.grahics.Rect;
+import android.graphics.Rect;
 
 public class Tile
 {
