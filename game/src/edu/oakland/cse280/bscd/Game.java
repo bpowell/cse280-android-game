@@ -83,6 +83,9 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		canvas.drawColor(Color.WHITE);
 
+		//Rect cancord = canvas.getClipBounds();
+		//Log.i("DASDASDSADASDASD", ""+cancord.left+","+cancord.right+","+cancord.top+","+cancord.bottom);
+
 		map.draw(canvas);
 		hero.draw(canvas);
 	}
