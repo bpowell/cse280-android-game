@@ -36,6 +36,8 @@ public class Map
 		this.player_location = player_location;
 
 		open_map_file();
+		read_data();
+		load_data();
 	}
 
 	private void open_map_file()
