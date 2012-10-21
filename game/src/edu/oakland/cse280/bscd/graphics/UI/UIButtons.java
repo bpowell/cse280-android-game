@@ -7,9 +7,12 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.graphics.Paint;
 
 public class UIButtons
 {
+	private Paint opake;
+
 	private Bitmap dpad;
 	private Rect dpad_location;
 
@@ -32,6 +35,9 @@ public class UIButtons
 		dpad_location = new Rect();
 		a_button_location = new Rect();
 		b_button_location = new Rect();
+
+		opake = new Paint();
+		opake.setAlpha(200);
 	}
 
 	public void draw(Canvas canvas)
@@ -40,6 +46,6 @@ public class UIButtons
 
 		dpad_location.left = bounds.left+10;
 		dpad_location.top = bounds.bottom-60;
-		canvas.drawBitmap(dpad, dpad_location.left, dpad_location.top, null);
+		canvas.drawBitmap(dpad, dpad_location.left, dpad_location.top, opake);
 	}
 }
