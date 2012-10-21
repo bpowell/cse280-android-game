@@ -1,5 +1,7 @@
 package edu.oakland.cse280.bscd.graphics.models;
 
+import android.grahics.Rect;
+
 public class Tile
 {
 	private int type;
