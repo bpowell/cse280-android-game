@@ -22,6 +22,8 @@ public class Map
 
 	private String data[];
 	private int map_id;
+	private ClipTiles clips;
+	private ArrayList<Tile> tiles;
 
 	private Rect player_location;
 
@@ -80,5 +82,19 @@ public class Map
 	private void load_data()
 	{
 		Bitmap tile_sheet = BitmapFactory.decodeResource(context.getResources(), map_id);
+		clips = new ClipTiles(tile_sheet, NUM_ROWS_TILES, NUM_COLS_TILES);
+
+		int base[][] = new int[MAP_HEIGHT][MAP_WIDTH];
+
+		int i, j;
+		tiles = new ArrayList<Tile>();
+		for(i=3; i<data.length; i++)
+		{
+			String t[] = data[i].split(" ");
+			for(j=0; j<t.length; j++)
+			{
+				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*80, (i-3)*80, 0, 0)));
+			}
+		}
 	}
 }
