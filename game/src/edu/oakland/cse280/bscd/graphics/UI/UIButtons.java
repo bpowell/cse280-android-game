@@ -28,5 +28,18 @@ public class UIButtons
 		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad);
 		a_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_button);
 		b_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.b_button);
+
+		dpad_location = new Rect();
+		a_button_location = new Rect();
+		b_button_location = new Rect();
+	}
+
+	public void draw(Canvas canvas)
+	{
+		Rect bounds = canvas.getClipBounds();
+
+		dpad_location.left = bounds.left+10;
+		dpad_location.top = bounds.bottom-60;
+		canvas.drawBitmap(dpad, dpad_location.left, dpad_location.top, null);
 	}
 }
