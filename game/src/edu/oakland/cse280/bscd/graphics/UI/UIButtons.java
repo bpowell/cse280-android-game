@@ -54,11 +54,29 @@ public class UIButtons
 	{
 		Rect bounds = canvas.getClipBounds();
 
-		dpad_locations.get(LEFT).left = bounds.left+10;
+		dpad_locations.get(LEFT).left = bounds.left+15;
 		dpad_locations.get(LEFT).top = bounds.bottom-50;
 		dpad_locations.get(LEFT).right = dpad_locations.get(LEFT).left+20;
 		dpad_locations.get(LEFT).bottom = dpad_locations.get(LEFT).top+20;
 		canvas.drawBitmap(dpad, dpad_locations.get(LEFT).left, dpad_locations.get(LEFT).top, opake);
+
+		dpad_locations.get(RIGHT).left = bounds.left+55;
+		dpad_locations.get(RIGHT).top = bounds.bottom-50;
+		dpad_locations.get(RIGHT).right = dpad_locations.get(RIGHT).left+20;
+		dpad_locations.get(RIGHT).bottom = dpad_locations.get(RIGHT).top+20;
+		canvas.drawBitmap(dpad, dpad_locations.get(RIGHT).left, dpad_locations.get(RIGHT).top, opake);
+
+		dpad_locations.get(TOP).left = bounds.left+35;
+		dpad_locations.get(TOP).top = bounds.bottom-70;
+		dpad_locations.get(TOP).right = dpad_locations.get(TOP).left+20;
+		dpad_locations.get(TOP).bottom = dpad_locations.get(TOP).top+20;
+		canvas.drawBitmap(dpad, dpad_locations.get(TOP).left, dpad_locations.get(TOP).top, opake);
+		
+		dpad_locations.get(BOTTOM).left = bounds.left+35;
+		dpad_locations.get(BOTTOM).top = bounds.bottom-30;
+		dpad_locations.get(BOTTOM).right = dpad_locations.get(BOTTOM).left+20;
+		dpad_locations.get(BOTTOM).bottom = dpad_locations.get(BOTTOM).top+20;
+		canvas.drawBitmap(dpad, dpad_locations.get(BOTTOM).left, dpad_locations.get(BOTTOM).top, opake);
 
 		a_button_location.left = bounds.right-70;
 		a_button_location.top = bounds.bottom-150;
@@ -81,5 +99,10 @@ public class UIButtons
 	public Rect getBbutton_location()
 	{
 		return b_button_location;
+	}
+
+	public ArrayList getDpad_locations()
+	{
+		return dpad_locations;
 	}
 }
