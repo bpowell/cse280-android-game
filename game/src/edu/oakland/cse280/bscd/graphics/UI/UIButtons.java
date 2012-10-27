@@ -9,12 +9,19 @@ import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.Paint;
 
+import java.util.ArrayList;
+
 public class UIButtons
 {
+	public static int LEFT = 0;
+	public static int RIGHT = 1;
+	public static int TOP = 2;
+	public static int BOTTOM = 3;
+
 	private Paint opake;
 
 	private Bitmap dpad;
-	private Rect dpad_location;
+	private ArrayList<Rect> dpad_locations;
 
 	private Bitmap a_button;
 	private Rect a_button_location;
@@ -28,11 +35,14 @@ public class UIButtons
 	{
 		this.context = context;
 
-		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad);
+		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad_part);
 		a_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_button);
 		b_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.b_button);
 
-		dpad_location = new Rect();
+		dpad_locations = new ArrayList<Rect>();
+		for(int i=0; i<4; i++)
+			dpad_locations.add(new Rect());
+
 		a_button_location = new Rect();
 		b_button_location = new Rect();
 
@@ -44,11 +54,11 @@ public class UIButtons
 	{
 		Rect bounds = canvas.getClipBounds();
 
-		dpad_location.left = bounds.left+10;
-		dpad_location.top = bounds.bottom-70;
-		dpad_location.right = dpad_location.left+60;
-		dpad_location.bottom = dpad_location.top+60;
-		canvas.drawBitmap(dpad, dpad_location.left, dpad_location.top, opake);
+		dpad_locations.get(LEFT).left = bounds.left+10;
+		dpad_locations.get(LEFT).top = bounds.bottom-50;
+		dpad_locations.get(LEFT).right = dpad_locations.get(LEFT).left+20;
+		dpad_locations.get(LEFT).bottom = dpad_locations.get(LEFT).top+20;
+		canvas.drawBitmap(dpad, dpad_locations.get(LEFT).left, dpad_locations.get(LEFT).top, opake);
 
 		a_button_location.left = bounds.right-70;
 		a_button_location.top = bounds.bottom-150;
@@ -61,11 +71,6 @@ public class UIButtons
 		b_button_location.right = b_button_location.left+60;
 		b_button_location.bottom = b_button_location.top+60;
 		canvas.drawBitmap(b_button, b_button_location.left, b_button_location.top, opake);
-	}
-
-	public Rect getDpad_location()
-	{
-		return dpad_location;
 	}
 
 	public Rect getAbutton_location()

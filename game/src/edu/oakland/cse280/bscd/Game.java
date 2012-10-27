@@ -75,7 +75,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		Rect dpad = ui_buttons.getDpad_location();
 		Rect a_button = ui_buttons.getAbutton_location();
 		Rect b_button = ui_buttons.getBbutton_location();
 
