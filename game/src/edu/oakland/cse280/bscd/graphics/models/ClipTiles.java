@@ -1,5 +1,7 @@
 package edu.oakland.cse280.bscd.graphics.models;
 
+import edu.oakland.cse280.bscd.Settings;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.util.Log;
@@ -9,14 +11,10 @@ import java.util.ArrayList;
 public class ClipTiles
 {
 	private ArrayList<Bitmap> cliptiles;
-
-	private int TILE_WIDTH;
-	private int TILE_HEIGHT;
+	private Settings settings;
 
 	public ClipTiles(Bitmap sheet, int rows, int cols)
 	{
-		TILE_WIDTH = 80;
-		TILE_HEIGHT = 80;
 		cliptiles = new ArrayList<Bitmap>();
 
 		int i, j;
@@ -24,7 +22,7 @@ public class ClipTiles
 		{
 			for(j=0;j<cols;j++)
 			{
-				cliptiles.add(Bitmap.createBitmap(sheet, j*TILE_WIDTH, i*TILE_HEIGHT, TILE_WIDTH, TILE_HEIGHT));
+				cliptiles.add(Bitmap.createBitmap(sheet, j*settings.TILE_WIDTH, i*settings.TILE_HEIGHT, settings.TILE_WIDTH, settings.TILE_HEIGHT));
 			}
 		}
 	}
