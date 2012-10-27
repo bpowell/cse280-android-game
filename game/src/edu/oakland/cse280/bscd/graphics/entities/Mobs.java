@@ -1,5 +1,7 @@
 package edu.oakland.cse280.bscd.graphics.entities;
 
+import edu.oakland.cse280.bscd.Settings;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Rect;
@@ -8,8 +10,7 @@ import java.util.ArrayList;
 
 public class Mobs
 {
-	private static int HEIGHT = 80;
-	private static int WIDTH  = 40;
+	private Settings settings;
 
 	private ArrayList<Bitmap> image;
 	private int direction;
@@ -19,10 +20,10 @@ public class Mobs
 	{
 		image = new ArrayList<Bitmap>();
 
-		image.add(Bitmap.createBitmap(sheet,0*WIDTH,0,WIDTH,HEIGHT));
-		image.add(Bitmap.createBitmap(sheet,1*WIDTH,0,WIDTH,HEIGHT));
-		image.add(Bitmap.createBitmap(sheet,2*WIDTH,0,WIDTH,HEIGHT));
-		image.add(Bitmap.createBitmap(sheet,3*WIDTH,0,WIDTH,HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,0*settings.TOON_WIDTH,0,settings.TOON_WIDTH,settings.TOON_HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,1*settings.TOON_WIDTH,0,settings.TOON_WIDTH,settings.TOON_HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,2*settings.TOON_WIDTH,0,settings.TOON_WIDTH,settings.TOON_HEIGHT));
+		image.add(Bitmap.createBitmap(sheet,3*settings.TOON_WIDTH,0,settings.TOON_WIDTH,settings.TOON_HEIGHT));
 
 		this.direction = direction;
 		this.location = starting_position;
