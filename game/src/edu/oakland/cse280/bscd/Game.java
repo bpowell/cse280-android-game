@@ -32,7 +32,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		this.context = context;
 
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(20,20,0,0));
-		map = new Map(context, "map01.txt", hero.getLocation());
+		map = new Map(context, "map02.txt", hero.getLocation());
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
 	}

@@ -1,5 +1,7 @@
 package edu.oakland.cse280.bscd.graphics.models;
 
+import edu.oakland.cse280.bscd.Settings;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 
 public class Map
 {
+	private Settings settings;
+
 	private String map_name;
 	private int MAP_HEIGHT;
 	private int MAP_WIDTH;
@@ -96,7 +100,7 @@ public class Map
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
 			{
-				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*80, (i-3)*80, (j*80)+80, ((i-3)*80)+80)));
+				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*settings.TILE_WIDTH, (i-3)*settings.TILE_HEIGHT, (j*settings.TILE_WIDTH)+settings.TILE_WIDTH, ((i-3)*settings.TILE_HEIGHT)+settings.TILE_HEIGHT)));
 			}
 		}
 	}
