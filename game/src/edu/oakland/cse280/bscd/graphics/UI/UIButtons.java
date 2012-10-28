@@ -40,6 +40,12 @@ public class UIButtons
 		SCREEN_HEIGHT = wm.getDefaultDisplay().getHeight();
 
 		dlef_loc = new Rect(15, SCREEN_HEIGHT-50, 35, SCREEN_HEIGHT-30);
+		drig_loc = new Rect(55, SCREEN_HEIGHT-50, 75, SCREEN_HEIGHT-30);
+		dtop_loc = new Rect(35, SCREEN_HEIGHT-70, 55, SCREEN_HEIGHT-50);
+		dbot_loc = new Rect(35, SCREEN_HEIGHT-30, 55, SCREEN_HEIGHT-10);
+
+		a_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-150, SCREEN_WIDTH-50, SCREEN_HEIGHT-130);
+		b_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-70, SCREEN_WIDTH-50, SCREEN_HEIGHT-50);
 
 		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad_part);
 		a_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_button);
@@ -82,5 +88,30 @@ public class UIButtons
 	public Rect get_DLEFT()
 	{
 		return dlef_loc;
+	}
+
+	public Rect get_DRIGHT()
+	{
+		return drig_loc;
+	}
+
+	public Rect get_DTOP()
+	{
+		return dtop_loc;
+	}
+
+	public Rect get_DBOTTOM()
+	{
+		return dbot_loc;
+	}
+
+	public Rect get_A()
+	{
+		return a_loc;
+	}
+
+	public Rect get_B()
+	{
+		return b_loc;
 	}
 }

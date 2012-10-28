@@ -79,6 +79,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	{
 
 		Rect dleft = ui_buttons.get_DLEFT();
+		Rect dright = ui_buttons.get_DRIGHT();
+		Rect dtop  = ui_buttons.get_DTOP();
+		Rect dbottom = ui_buttons.get_DBOTTOM();
+
+		Log.i("LOLCATIONS: ", ""+dright.left+","+dright.top+","+dright.right+","+dright.bottom);
+
+		Rect a = ui_buttons.get_A();
+		Rect b = ui_buttons.get_B();
+
 		if(event.getAction() == MotionEvent.ACTION_DOWN)
 		{
 			int x,y;
@@ -87,8 +96,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 			if(dleft.intersect(x,y,x+20,y+20))
 				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Left dpad pressed");
+			else if(dright.intersect(x,y,x+20,y+20))
+				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Right dpad pressed");
+			else if(dtop.intersect(x,y,x+20,y+20))
+				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Top dpad pressed");
+			else if(dbottom.intersect(x,y,x+20,y+20))
+				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Bottom dpad pressed");
 
-			Log.i("DASHDKAJDHSAKH", ""+x+","+y);
+			Log.i("DSDHASDHASKDHAKSDH", ""+x+","+y);
 		}
 		return true;
 	}
