@@ -83,8 +83,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		Rect dtop  = ui_buttons.get_DTOP();
 		Rect dbottom = ui_buttons.get_DBOTTOM();
 
-		Log.i("LOLCATIONS: ", ""+dright.left+","+dright.top+","+dright.right+","+dright.bottom);
-
 		Rect a = ui_buttons.get_A();
 		Rect b = ui_buttons.get_B();
 
@@ -95,13 +93,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			y = (int)event.getY();
 
 			if(dleft.intersect(x,y,x+20,y+20))
-				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Left dpad pressed");
+				hero.move(-(Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_LEFT);
 			else if(dright.intersect(x,y,x+20,y+20))
-				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Right dpad pressed");
+				hero.move((Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_RIGHT);
 			else if(dtop.intersect(x,y,x+20,y+20))
-				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Top dpad pressed");
+				hero.move(0,-(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_FRONT);
 			else if(dbottom.intersect(x,y,x+20,y+20))
-				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Bottom dpad pressed");
+				hero.move(0,(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_BACK);
 
 			Log.i("DSDHASDHASKDHAKSDH", ""+x+","+y);
 		}

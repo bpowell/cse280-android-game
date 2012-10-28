@@ -13,8 +13,8 @@ public class Mobs
 	private Settings settings;
 
 	private ArrayList<Bitmap> image;
-	private int direction;
-	private Rect location;
+	protected int direction;
+	protected Rect location;
 
 	public Mobs(Bitmap sheet, int direction, Rect starting_position)
 	{
