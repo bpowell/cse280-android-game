@@ -111,6 +111,8 @@ public class Map
 			return;
 
 		Rect coords = canvas.getClipBounds();
+		coords.bottom += 100;
+		coords.right += 100;
 
 		for(int i=0; i<tiles.size(); i++)
 		{
