@@ -25,6 +25,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private UIButtons ui_buttons;
 
 	private Context context;
+	private int SCREEN_WDITH;
+	private int SCREEN_HEIGHT;
 
 	public Game(Context context)
 	{
@@ -100,8 +102,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 				hero.move(0,-(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_FRONT);
 			else if(dbottom.intersect(x,y,x+20,y+20))
 				hero.move(0,(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_BACK);
-
-			Log.i("DSDHASDHASKDHAKSDH", ""+x+","+y);
 		}
 		return true;
 	}
@@ -113,8 +113,30 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			return;
 
 		canvas.drawColor(Color.WHITE);
+		int top, left;
+
 		Rect hero_location = hero.getLocation();
-		canvas.translate(-(hero_location.left-(canvas.getWidth()/2)), -(hero_location.top-(canvas.getHeight()/2)));
+		Rect canvas_rect = canvas.getClipBounds();
+		int mwidth = map.getWidth();
+		int mheight = map.getHeight();
+
+		if(hero_location.bottom >= mheight)
+			top = -(mheight-2*Settings.TILE_HEIGHT);
+		else if(hero_location.top <= (canvas.getHeight()/2))
+			top = 0;
+		else
+			top = -(hero_location.top-(canvas.getHeight()/2));
+
+		if(hero_location.right >= mwidth)
+			left = -(mwidth-2*Settings.TILE_WIDTH);
+		else if(hero_location.left <= (canvas.getWidth()/2))
+			left = 0;
+		else
+			left = -(hero_location.left-(canvas.getWidth()/2));
+
+
+		//canvas.translate(-(hero_location.left-(canvas.getWidth()/2)), -(hero_location.top-(canvas.getHeight()/2)));
+		canvas.translate(left, top);
 
 		map.draw(canvas);
 		ui_buttons.draw(canvas);

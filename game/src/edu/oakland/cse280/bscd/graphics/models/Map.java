@@ -113,6 +113,8 @@ public class Map
 		Rect coords = canvas.getClipBounds();
 		coords.bottom += 100;
 		coords.right += 100;
+		coords.left -= 100;
+		coords.top -= 100;
 
 		for(int i=0; i<tiles.size(); i++)
 		{
@@ -123,5 +125,15 @@ public class Map
 			if( (location.left>=coords.left) && (location.right<=coords.right) && (location.bottom<=coords.bottom) && (location.top>=coords.top) )
 				clips.draw(canvas, tile);
 		}
+	}
+
+	public int getHeight()
+	{
+		return MAP_HEIGHT;
+	}
+
+	public int getWidth()
+	{
+		return MAP_WIDTH;
 	}
 }
