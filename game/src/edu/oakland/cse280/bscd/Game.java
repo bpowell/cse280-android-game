@@ -15,6 +15,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import java.util.ArrayList;
+
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
@@ -75,14 +77,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		Rect a_button = ui_buttons.getAbutton_location();
-		Rect b_button = ui_buttons.getBbutton_location();
 
+		Rect dleft = ui_buttons.get_DLEFT();
 		if(event.getAction() == MotionEvent.ACTION_DOWN)
 		{
-			float x,y;
-			x = event.getX();
-			y = event.getY();
+			int x,y;
+			x = (int)event.getX();
+			y = (int)event.getY();
+
+			if(dleft.intersect(x,y,x+20,y+20))
+				Log.i("HFHSDLFHSDLFHSDLKFHSDFS", "Left dpad pressed");
 
 			Log.i("DASHDKAJDHSAKH", ""+x+","+y);
 		}

@@ -8,43 +8,42 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Rect;
 import android.graphics.Paint;
-
-import java.util.ArrayList;
+import android.util.Log;
+import android.view.WindowManager;
 
 public class UIButtons
 {
-	public static int LEFT = 0;
-	public static int RIGHT = 1;
-	public static int TOP = 2;
-	public static int BOTTOM = 3;
-
 	private Paint opake;
 
 	private Bitmap dpad;
-	private ArrayList<Rect> dpad_locations;
-
 	private Bitmap a_button;
-	private Rect a_button_location;
-
 	private Bitmap b_button;
-	private Rect b_button_location;
+
+	private Rect dlef_loc;
+	private Rect drig_loc;
+	private Rect dtop_loc;
+	private Rect dbot_loc;
+
+	private Rect a_loc;
+	private Rect b_loc;
 
 	private Context context;
+
+	private int SCREEN_WIDTH;
+	private int SCREEN_HEIGHT;
 
 	public UIButtons(Context context)
 	{
 		this.context = context;
+		WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
+		SCREEN_WIDTH = wm.getDefaultDisplay().getWidth();
+		SCREEN_HEIGHT = wm.getDefaultDisplay().getHeight();
+
+		dlef_loc = new Rect(15, SCREEN_HEIGHT-50, 35, SCREEN_HEIGHT-30);
 
 		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad_part);
 		a_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_button);
 		b_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.b_button);
-
-		dpad_locations = new ArrayList<Rect>();
-		for(int i=0; i<4; i++)
-			dpad_locations.add(new Rect());
-
-		a_button_location = new Rect();
-		b_button_location = new Rect();
 
 		opake = new Paint();
 		opake.setAlpha(200);
@@ -53,56 +52,35 @@ public class UIButtons
 	public void draw(Canvas canvas)
 	{
 		Rect bounds = canvas.getClipBounds();
+		int left, top;
 
-		dpad_locations.get(LEFT).left = bounds.left+15;
-		dpad_locations.get(LEFT).top = bounds.bottom-50;
-		dpad_locations.get(LEFT).right = dpad_locations.get(LEFT).left+20;
-		dpad_locations.get(LEFT).bottom = dpad_locations.get(LEFT).top+20;
-		canvas.drawBitmap(dpad, dpad_locations.get(LEFT).left, dpad_locations.get(LEFT).top, opake);
+		left = bounds.left+15;
+		top = bounds.bottom-50;
+		canvas.drawBitmap(dpad, left, top, opake);
 
-		dpad_locations.get(RIGHT).left = bounds.left+55;
-		dpad_locations.get(RIGHT).top = bounds.bottom-50;
-		dpad_locations.get(RIGHT).right = dpad_locations.get(RIGHT).left+20;
-		dpad_locations.get(RIGHT).bottom = dpad_locations.get(RIGHT).top+20;
-		canvas.drawBitmap(dpad, dpad_locations.get(RIGHT).left, dpad_locations.get(RIGHT).top, opake);
+		left = bounds.left+55;
+		top = bounds.bottom-50;
+		canvas.drawBitmap(dpad, left, top, opake);
 
-		dpad_locations.get(TOP).left = bounds.left+35;
-		dpad_locations.get(TOP).top = bounds.bottom-70;
-		dpad_locations.get(TOP).right = dpad_locations.get(TOP).left+20;
-		dpad_locations.get(TOP).bottom = dpad_locations.get(TOP).top+20;
-		canvas.drawBitmap(dpad, dpad_locations.get(TOP).left, dpad_locations.get(TOP).top, opake);
+		left = bounds.left+35;
+		top = bounds.bottom-70;
+		canvas.drawBitmap(dpad, left, top, opake);
 		
-		dpad_locations.get(BOTTOM).left = bounds.left+35;
-		dpad_locations.get(BOTTOM).top = bounds.bottom-30;
-		dpad_locations.get(BOTTOM).right = dpad_locations.get(BOTTOM).left+20;
-		dpad_locations.get(BOTTOM).bottom = dpad_locations.get(BOTTOM).top+20;
-		canvas.drawBitmap(dpad, dpad_locations.get(BOTTOM).left, dpad_locations.get(BOTTOM).top, opake);
+		left = bounds.left+35;
+		top = bounds.bottom-30;
+		canvas.drawBitmap(dpad, left, top, opake);
 
-		a_button_location.left = bounds.right-70;
-		a_button_location.top = bounds.bottom-150;
-		a_button_location.right = a_button_location.left+60;
-		a_button_location.bottom = a_button_location.top+60;
-		canvas.drawBitmap(a_button, a_button_location.left, a_button_location.top, opake);
+		left = bounds.right-70;
+		top = bounds.bottom-150;
+		canvas.drawBitmap(a_button, left, top, opake);
 
-		b_button_location.left = bounds.right-70;
-		b_button_location.top = bounds.bottom-70;
-		b_button_location.right = b_button_location.left+60;
-		b_button_location.bottom = b_button_location.top+60;
-		canvas.drawBitmap(b_button, b_button_location.left, b_button_location.top, opake);
+		left = bounds.right-70;
+		top = bounds.bottom-70;
+		canvas.drawBitmap(b_button, left, top, opake);
 	}
 
-	public Rect getAbutton_location()
+	public Rect get_DLEFT()
 	{
-		return a_button_location;
-	}
-
-	public Rect getBbutton_location()
-	{
-		return b_button_location;
-	}
-
-	public ArrayList getDpad_locations()
-	{
-		return dpad_locations;
+		return dlef_loc;
 	}
 }
