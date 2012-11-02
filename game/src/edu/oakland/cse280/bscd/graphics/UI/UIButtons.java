@@ -1,6 +1,7 @@
 package edu.oakland.cse280.bscd.graphics.UI;
 
 import edu.oakland.cse280.bscd.R;
+import edu.oakland.cse280.bscd.Settings;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -31,6 +32,8 @@ public class UIButtons
 
 	private int SCREEN_WIDTH;
 	private int SCREEN_HEIGHT;
+	private int LEFT_MARGIN;
+	private int BOTTOM_MARGIN;
 
 	public UIButtons(Context context)
 	{
@@ -38,11 +41,13 @@ public class UIButtons
 		WindowManager wm = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 		SCREEN_WIDTH = wm.getDefaultDisplay().getWidth();
 		SCREEN_HEIGHT = wm.getDefaultDisplay().getHeight();
+		LEFT_MARGIN = 15;
+		BOTTOM_MARGIN = 20;
 
-		dlef_loc = new Rect(15, SCREEN_HEIGHT-50, 35, SCREEN_HEIGHT-30);
-		drig_loc = new Rect(55, SCREEN_HEIGHT-50, 75, SCREEN_HEIGHT-30);
-		dtop_loc = new Rect(35, SCREEN_HEIGHT-70, 55, SCREEN_HEIGHT-50);
-		dbot_loc = new Rect(35, SCREEN_HEIGHT-30, 55, SCREEN_HEIGHT-10);
+		dlef_loc = new Rect(LEFT_MARGIN, SCREEN_HEIGHT-(BOTTOM_MARGIN+2*Settings.DPAD_SIZE), LEFT_MARGIN+Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+Settings.DPAD_SIZE));
+		drig_loc = new Rect(LEFT_MARGIN+2*Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+2*Settings.DPAD_SIZE), LEFT_MARGIN+3*Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+Settings.DPAD_SIZE));
+		dbot_loc = new Rect(LEFT_MARGIN+1*Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+Settings.DPAD_SIZE), LEFT_MARGIN+2*Settings.DPAD_SIZE, SCREEN_HEIGHT-BOTTOM_MARGIN);
+		dtop_loc = new Rect(LEFT_MARGIN+1*Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+3*Settings.DPAD_SIZE), LEFT_MARGIN+2*Settings.DPAD_SIZE, SCREEN_HEIGHT-(BOTTOM_MARGIN+2*Settings.DPAD_SIZE));
 
 		a_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-150, SCREEN_WIDTH-50, SCREEN_HEIGHT-130);
 		b_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-70, SCREEN_WIDTH-50, SCREEN_HEIGHT-50);
@@ -60,20 +65,20 @@ public class UIButtons
 		Rect bounds = canvas.getClipBounds();
 		int left, top;
 
-		left = bounds.left+15;
-		top = bounds.bottom-50;
+		left = bounds.left+LEFT_MARGIN;
+		top = bounds.bottom-(BOTTOM_MARGIN+2*Settings.DPAD_SIZE);
 		canvas.drawBitmap(dpad, left, top, opake);
 
-		left = bounds.left+55;
-		top = bounds.bottom-50;
+		left = bounds.left+LEFT_MARGIN+2*Settings.DPAD_SIZE;
+		top = bounds.bottom-(BOTTOM_MARGIN+2*Settings.DPAD_SIZE);
 		canvas.drawBitmap(dpad, left, top, opake);
 
-		left = bounds.left+35;
-		top = bounds.bottom-70;
+		left = bounds.left+LEFT_MARGIN+1*Settings.DPAD_SIZE;
+		top = bounds.bottom-(BOTTOM_MARGIN+Settings.DPAD_SIZE);
 		canvas.drawBitmap(dpad, left, top, opake);
 		
-		left = bounds.left+35;
-		top = bounds.bottom-30;
+		left = bounds.left+LEFT_MARGIN+1*Settings.DPAD_SIZE;
+		top = bounds.bottom-(BOTTOM_MARGIN+3*Settings.DPAD_SIZE);
 		canvas.drawBitmap(dpad, left, top, opake);
 
 		left = bounds.right-70;

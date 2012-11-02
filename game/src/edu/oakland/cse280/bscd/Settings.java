@@ -12,4 +12,6 @@ public class Settings
 	public static int TOON_FACE_FRONT = 1;
 	public static int TOON_FACE_LEFT = 2;
 	public static int TOON_FACE_RIGHT = 3;
+
+	public static int DPAD_SIZE = 40;
 }
