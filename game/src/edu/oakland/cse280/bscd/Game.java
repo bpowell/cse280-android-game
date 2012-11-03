@@ -88,19 +88,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		Rect a = ui_buttons.get_A();
 		Rect b = ui_buttons.get_B();
 
-		if(event.getAction() == MotionEvent.ACTION_DOWN)
-		{
-			int x,y;
-			x = (int)event.getX();
-			y = (int)event.getY();
+		int x,y;
+		x = (int)event.getX();
+		y = (int)event.getY();
 
-			if(dleft.intersect(x,y,x+20,y+20))
+		if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_MOVE)
+		{
+			if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 				hero.move(-(Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_LEFT);
-			else if(dright.intersect(x,y,x+20,y+20))
+			else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 				hero.move((Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_RIGHT);
-			else if(dtop.intersect(x,y,x+20,y+20))
+			else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 				hero.move(0,-(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_FRONT);
-			else if(dbottom.intersect(x,y,x+20,y+20))
+			else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 				hero.move(0,(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_BACK);
 		}
 		return true;
