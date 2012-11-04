@@ -158,7 +158,7 @@ public class Map
 
 	public ArrayList getLoaded_tiles()
 	{
-		return loaded_tiles;
+		return (ArrayList)loaded_tiles.clone();
 	}
 
 	public ArrayList getNon_passable_tiles()

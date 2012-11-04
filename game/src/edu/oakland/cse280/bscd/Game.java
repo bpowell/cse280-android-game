@@ -94,14 +94,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_MOVE)
 		{
-			if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-				hero.move(-(Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_LEFT);
-			else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-				hero.move((Settings.TOON_WIDTH/2),0, Settings.TOON_FACE_RIGHT);
-			else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-				hero.move(0,-(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_FRONT);
-			else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-				hero.move(0,(Settings.TOON_HEIGHT/2), Settings.TOON_FACE_BACK);
+			synchronized(this)
+			{
+				if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+					hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+				else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+					hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+				else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+					hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+				else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+					hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles());
+			}
 		}
 		return true;
 	}
@@ -140,6 +143,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		map.draw(canvas);
 		ui_buttons.draw(canvas);
-		hero.draw(canvas, map.getLoaded_tiles(), map.getNon_passable_tiles());
+		hero.draw(canvas);
 	}
 }
