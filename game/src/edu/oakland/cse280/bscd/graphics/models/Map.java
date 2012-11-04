@@ -29,6 +29,8 @@ public class Map
 	private int map_id;
 	private ClipTiles clips;
 	private ArrayList<Tile> tiles;
+	private ArrayList<Tile> loaded_tiles;
+	private ArrayList<Integer> non_passable_tiles;
 
 	private Rect player_location;
 
@@ -39,6 +41,9 @@ public class Map
 		this.context = context;
 		this.map_name = map_name;
 		this.player_location = player_location;
+
+		loaded_tiles = new ArrayList<Tile>();
+		non_passable_tiles = new ArrayList<Integer>();
 
 		open_map_file();
 		read_data();
@@ -80,8 +85,17 @@ public class Map
 		String tileset_name = data[0];
 		NUM_ROWS_TILES = Integer.parseInt(data[1].split(",")[0]);
 		NUM_COLS_TILES = Integer.parseInt(data[1].split(",")[1]);
-		MAP_WIDTH = Integer.parseInt(data[2].split(",")[0]);
-		MAP_HEIGHT = Integer.parseInt(data[2].split(",")[1]);
+
+
+		String tmp[] = data[2].split(",");
+		int i=0;
+		for(i=0; i<tmp.length; i++)
+		{
+			non_passable_tiles.add(Integer.parseInt(tmp[i]));
+		}
+
+		MAP_WIDTH = Integer.parseInt(data[3].split(",")[0]);
+		MAP_HEIGHT = Integer.parseInt(data[3].split(",")[1]);
 
 		map_id = context.getResources().getIdentifier(tileset_name, "drawable", context.getPackageName());
 	}
@@ -95,12 +109,12 @@ public class Map
 
 		int i, j;
 		tiles = new ArrayList<Tile>();
-		for(i=3; i<data.length; i++)
+		for(i=4; i<data.length; i++)
 		{
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
 			{
-				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*settings.TILE_WIDTH, (i-3)*settings.TILE_HEIGHT, (j*settings.TILE_WIDTH)+settings.TILE_WIDTH, ((i-3)*settings.TILE_HEIGHT)+settings.TILE_HEIGHT)));
+				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*settings.TILE_WIDTH, (i-4)*settings.TILE_HEIGHT, (j*settings.TILE_WIDTH)+settings.TILE_WIDTH, ((i-4)*settings.TILE_HEIGHT)+settings.TILE_HEIGHT)));
 			}
 		}
 	}
@@ -116,6 +130,8 @@ public class Map
 		coords.left -= 100;
 		coords.top -= 100;
 
+		loaded_tiles.clear();
+
 		for(int i=0; i<tiles.size(); i++)
 		{
 			Tile tile = tiles.get(i);
@@ -123,7 +139,10 @@ public class Map
 			Rect location = tile.getLocation();
 
 			if( (location.left>=coords.left) && (location.right<=coords.right) && (location.bottom<=coords.bottom) && (location.top>=coords.top) )
+			{
 				clips.draw(canvas, tile);
+				loaded_tiles.add(tile);
+			}
 		}
 	}
 
@@ -135,5 +154,15 @@ public class Map
 	public int getWidth()
 	{
 		return MAP_WIDTH;
+	}
+
+	public ArrayList getLoaded_tiles()
+	{
+		return loaded_tiles;
+	}
+
+	public ArrayList getNon_passable_tiles()
+	{
+		return non_passable_tiles;
 	}
 }

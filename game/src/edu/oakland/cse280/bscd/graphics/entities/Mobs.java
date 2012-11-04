@@ -12,7 +12,7 @@ public class Mobs
 {
 	private Settings settings;
 
-	private ArrayList<Bitmap> image;
+	protected ArrayList<Bitmap> image;
 	protected int direction;
 	protected Rect location;
 
@@ -49,7 +49,7 @@ public class Mobs
 		this.direction = direction;
 	}
 
-	public void draw(Canvas canvas)
+	public void draw(Canvas canvas) 
 	{
 		Bitmap mob = image.get(direction);
 		canvas.drawBitmap(mob, location.left, location.top, null);

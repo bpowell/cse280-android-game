@@ -140,6 +140,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		map.draw(canvas);
 		ui_buttons.draw(canvas);
-		hero.draw(canvas);
+		hero.draw(canvas, map.getLoaded_tiles(), map.getNon_passable_tiles());
 	}
 }
