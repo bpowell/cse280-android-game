@@ -27,6 +27,13 @@ public final class R {
     public static final class layout {
         public static final int load_screen=0x7f030000;
         public static final int main=0x7f030001;
+        public static final int back=0x7f020000;
+        public static final int front=0x7f020001;
+        public static final int left=0x7f020002;
+        public static final int right=0x7f020003;
+    }
+    public static final class layout {
+        public static final int main=0x7f030000;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
