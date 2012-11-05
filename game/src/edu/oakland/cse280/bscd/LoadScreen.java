@@ -15,7 +15,6 @@ public class LoadScreen extends Activity
     private TextView save2;
     private TextView save3;
 
-	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
