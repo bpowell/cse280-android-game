@@ -3,7 +3,7 @@ package edu.oakland.cse280.bscd;
 import java.util.ArrayList;
 import java.util.List;
 
-import edu.oakland.
+import edu.oakland.cse280.bscd.entities.Hero;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -18,15 +18,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
  
     // Database Name
-    private static final String DATABASE_NAME = "contactsManager";
+    private static final String DATABASE_NAME = "herosManager";
  
-    // Contacts table name
-    private static final String TABLE_CONTACTS = "contacts";
+    // Heros table name
+    private static final String TABLE_HEROS = "heros";
  
-    // Contacts Table Columns names
+    // Heros Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
-    private static final String KEY_PH_NO = "phone_number";
+    private static final String KEY_LEVEL = "level";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -34,18 +34,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
     // Creating Tables
     @Override
-    public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_CONTACTS + "("
+    public void onCreate(SQLiteDatabase db) {String CREATE_HEROS_TABLE = "CREATE TABLE " + TABLE_HEROS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_PH_NO + " TEXT" + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+                + KEY_LEVEL + " TEXT" + ")";
+        db.execSQL(CREATE_HEROS_TABLE);
     }
  
     // Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         // Drop older table if existed
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HEROS);
  
         // Create tables again
         onCreate(db);
@@ -55,40 +54,40 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
  
-    // Adding new contact
-    void addContact(Contact contact) {
+    // Adding new hero
+    void addHero(Hero hero) {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, contact.getName()); // Contact Name
-        values.put(KEY_PH_NO, contact.getPhoneNumber()); // Contact Phone
+        values.put(KEY_ID, hero.getId());
+        values.put(KEY_NAME, hero.getName()); // Hero Name
+        values.put(KEY_LEVEL, hero.getLevel()); // Hero Phone
  
         // Inserting Row
-        db.insert(TABLE_CONTACTS, null, values);
+        db.insert(TABLE_HEROS, null, values);
         db.close(); // Closing database connection
     }
  
-    // Getting single contact
-    Contact getContact(int id) {
+    // Getting single hero
+    Hero getContact(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
  
-        Cursor cursor = db.query(TABLE_CONTACTS, new String[] { KEY_ID,
-                KEY_NAME, KEY_PH_NO }, KEY_ID + "=?",
+        Cursor cursor = db.query(TABLE_HEROS, new String[] { KEY_ID,
+                KEY_NAME, KEY_LEVEL }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
  
-        Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-                cursor.getString(1), cursor.getString(2));
-        // return contact
-        return contact;
+        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+        // return hero
+        return hero;
     }
  
-    // Getting All Contacts
-    public List<Contact> getAllContacts() {
-        List<Contact> contactList = new ArrayList<Contact>();
+    // Getting All Heros
+    public List<Hero> getAllHeros() {
+        List<Hero> heroList = new ArrayList<Hero>();
         // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+        String selectQuery = "SELECT  * FROM " + TABLE_HEROS;
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -96,43 +95,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                Contact contact = new Contact();
-                contact.setID(Integer.parseInt(cursor.getString(0)));
-                contact.setName(cursor.getString(1));
-                contact.setPhoneNumber(cursor.getString(2));
-                // Adding contact to list
-                contactList.add(contact);
+                Hero hero = new Hero();
+                hero.setId(Integer.parseInt(cursor.getString(0)));
+                hero.setName(cursor.getString(1));
+                hero.setLevel(Integer.parseInt(cursor.getString(2)));
+                // Adding hero to list
+                heroList.add(hero);
             } while (cursor.moveToNext());
         }
  
-        // return contact list
-        return contactList;
+        // return hero list
+        return heroList;
     }
  
-    // Updating single contact
-    public int updateContact(Contact contact) {
+    // Updating single hero
+    public int updateHero(Hero hero) {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_NAME, contact.getName());
-        values.put(KEY_PH_NO, contact.getPhoneNumber());
+        values.put(KEY_ID, hero.getId());
+        values.put(KEY_NAME, hero.getName());
+        values.put(KEY_LEVEL, hero.getLevel());
  
         // updating row
-        return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.getID()) });
+        return db.update(TABLE_HEROS, values, KEY_ID + " = ?",
+                new String[] { String.valueOf(hero.getId()) });
     }
  
-    // Deleting single contact
-    public void deleteContact(Contact contact) {
+    // Deleting single hero
+    public void deleteHero(Hero hero) {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
-                new String[] { String.valueOf(contact.getID()) });
+        db.delete(TABLE_HEROS, KEY_ID + " = ?",
+                new String[] { String.valueOf(hero.getId()) });
         db.close();
     }
  
-    // Getting contacts Count
-    public int getContactsCount() {
-        String countQuery = "SELECT  * FROM " + TABLE_CONTACTS;
+    // Getting heros Count
+    public int getHerosCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_HEROS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
         cursor.close();

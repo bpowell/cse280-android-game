@@ -32,15 +32,26 @@ public class Hero extends Mob
     private int bootDefense = 0;
     private int level = 1;
 
-    public Hero(String name, int strength, int attack, int defense, int vit)
+    public Hero(int id, String name, int strength, int attack, int defense, int vit)
     {
-        super(name);
+        super(id, name);
         this.strength = strength;
         this.attack = attack;
         this.defense = defense;
         this.vit = vit;
         this.maxHP = vit * 10;
         this.hp = maxHP;
+    }
+    
+    public Hero(int id, String name, int level)
+    {
+        super(id, name);
+        this.level = level;
+    }
+
+    public Hero()
+    {
+        super();
     }
 
     public void setStrength(int s)
@@ -71,6 +82,11 @@ public class Hero extends Mob
     {
 
         this.hp = hp;
+    }
+
+    public void setLevel(int level)
+    {
+        this.level = level;
     }
 
     public void setHelm(Armor armor)

@@ -17,9 +17,9 @@ public class EnemyMob extends Mob
     private int[] itemToGive;  /// need to figure out how to pass an array from the database
     private boolean isAlive = true;
 
-    public EnemyMob(String name, int strength, int attack, int defense, int vit, int min, int max, int exp, int hp)
+    public EnemyMob(int id, String name, int strength, int attack, int defense, int vit, int min, int max, int exp, int hp)
     {
-        super(name);
+        super(id, name);
         this.strength = strength;
         this.attack = attack;
         this.defense = defense;
