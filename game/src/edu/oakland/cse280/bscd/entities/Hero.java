@@ -49,6 +49,12 @@ public class Hero extends Mob
         this.level = level;
     }
 
+    public Hero(String name, int level)
+    {
+        super.setName(name);
+        this.level = level;
+    }
+
     public Hero()
     {
         super();
