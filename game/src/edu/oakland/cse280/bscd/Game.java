@@ -1,6 +1,7 @@
 package edu.oakland.cse280.bscd;
 
 import edu.oakland.cse280.bscd.graphics.entities.Hero;
+import edu.oakland.cse280.bscd.graphics.entities.NPC;
 import edu.oakland.cse280.bscd.graphics.models.Map;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
 
@@ -21,6 +22,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
 	private Hero hero;
+	private NPC mayor;
 	private Map map;
 	private UIButtons ui_buttons;
 
@@ -36,6 +38,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		this.context = context;
 
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 0, Settings.TOON_WIDTH, Settings.TOON_HEIGHT));
+		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", hero.getLocation());
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
@@ -142,6 +145,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		canvas.translate(left, top);
 
 		map.draw(canvas);
+		mayor.draw(canvas);
 		ui_buttons.draw(canvas);
 		hero.draw(canvas);
 	}
