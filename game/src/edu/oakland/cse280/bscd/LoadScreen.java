@@ -8,7 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Button;
 
 import java.util.List;
 
@@ -45,6 +47,16 @@ public class LoadScreen extends Activity
       //    //  db.addHero(new Hero(3, "Johnny", 1));
       //  }
 
+
+
+    
+
+        this.update();
+
+	}
+
+    public void update()
+    {
         List<Hero> heros = db.getAllHeros();       
  
         for (Hero h : heros) {
@@ -67,17 +79,16 @@ public class LoadScreen extends Activity
                 }
             }
 
-    }
-
-        this.update();
-
-	}
-
-    public void update()
-    {
+        }
         // diplay the save information on the buttons
         if(hero1 != null)
+        {
+            
+            for(int i=0;i<20;i++)
+                Log.i("update was called ",hero1.toString());
             save1.setText(hero1.getName()+"\r\nLevel: " + hero1.getLevel());
+
+        }
         else
             save1.setText("New Game");
         if(hero2 != null)
@@ -128,10 +139,66 @@ public class LoadScreen extends Activity
     {
         dialog = new Dialog(LoadScreen.this);
         dialog.setContentView(R.layout.delete);
-        dialog.setTitle("My Dialog");
+        dialog.setTitle("Select save to delete");
         dialog.setCancelable(true);
+
+        Button save1Delete = (Button) dialog.findViewById(R.id.save1Delete);
+        Button save2Delete = (Button) dialog.findViewById(R.id.save2Delete);
+        Button save3Delete = (Button) dialog.findViewById(R.id.save3Delete);
+        Button cancelDelete = (Button) dialog.findViewById(R.id.cancelDelete);
+
+        save1Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero1 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero1);
+                    hero1=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        save2Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero2 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero2);
+                    hero2=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        save3Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero3 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero3);
+                    hero3=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        cancelDelete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            dialog.dismiss();
+        }
+        });
         dialog.show();       
     }
 
-
-}
+} 
