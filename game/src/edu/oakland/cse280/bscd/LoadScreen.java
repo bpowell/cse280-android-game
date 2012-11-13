@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Button;
-
 import java.util.List;
 
 import edu.oakland.cse280.bscd.DatabaseHandler;
