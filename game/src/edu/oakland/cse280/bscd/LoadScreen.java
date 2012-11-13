@@ -1,6 +1,7 @@
 package edu.oakland.cse280.bscd;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -23,6 +24,7 @@ public class LoadScreen extends Activity
     private Hero hero2;
     private Hero hero3;
     private DatabaseHandler db;
+    private Dialog dialog;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState)
@@ -64,7 +66,15 @@ public class LoadScreen extends Activity
                     break;
                 }
             }
+
     }
+
+        this.update();
+
+	}
+
+    public void update()
+    {
         // diplay the save information on the buttons
         if(hero1 != null)
             save1.setText(hero1.getName()+"\r\nLevel: " + hero1.getLevel());
@@ -78,7 +88,8 @@ public class LoadScreen extends Activity
             save3.setText(hero3.getName()+"\r\nLevel: " + hero3.getLevel());
         else
             save3.setText("New Game");
-	}
+
+    }
 
     public void save1(View view)
     {
@@ -111,6 +122,15 @@ public class LoadScreen extends Activity
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
         this.finish();
+    }
+
+    public void delete(View view)
+    {
+        dialog = new Dialog(LoadScreen.this);
+        dialog.setContentView(R.layout.delete);
+        dialog.setTitle("My Dialog");
+        dialog.setCancelable(true);
+        dialog.show();       
     }
 
 

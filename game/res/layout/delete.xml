@@ -6,7 +6,7 @@
     >
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="fill_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content">
         <TextView  
             android:layout_width="fill_parent" 
@@ -20,71 +20,49 @@
                 android:layout_width="fill_parent"
                 android:layout_height="2px"/>
 
-        <LinearLayout
+        <Button
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="50dp"
-            android:onClick="save1"
-            android:background="#fff">
-            <TextView  
-                android:id="@+id/save1"
-                android:layout_width="fill_parent" 
-                android:layout_height="fill_parent" 
-                android:textColor="#000"/>
-        </LinearLayout>
+            android:onClick="save1Delete"
+            android:text="Delete save1"
+            android:background="#fff"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="2px"/>
 
-        <LinearLayout
+        <Button
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:background="#fff"
-            android:onClick="save2"
-            android:layout_height="50dp">
-            <TextView  
-                android:id="@+id/save2"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:textColor="#000"/>
-        </LinearLayout>
+            android:text="Delete save2"
+            android:onClick="save2Delete"
+            android:layout_height="50dp"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="2px"/>
 
-        <LinearLayout
+        <Button
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:background="#fff"
-            android:onClick="save3"
-            android:layout_height="50dp">
-            <TextView  
-                android:id="@+id/save3"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:textColor="#000"/>
-        </LinearLayout>
+            android:text="Delete save3"
+            android:onClick="save3Delete"
+            android:layout_height="50dp"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
             android:layout_height="2px"/>
 
-        <LinearLayout
+        <Button
             android:orientation="vertical"
-            android:layout_width="50dp"
+            android:layout_width="fill_parent"
             android:background="#fff"
-            android:onClick="delete"
-            android:layout_height="50dp">
-            <TextView  
-                android:id="@+id/delete"
-                android:layout_width="fill_parent" 
-                android:layout_height="wrap_content" 
-                android:text="Delete Game"
-                android:textColor="#000"/>
-        </LinearLayout>
-
-
+            android:text="Cancel"
+            android:onClick="cancelDelete"
+            android:layout_height="50dp"/>
+          
 </LinearLayout>
 
