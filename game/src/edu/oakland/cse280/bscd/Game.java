@@ -4,6 +4,7 @@ import edu.oakland.cse280.bscd.graphics.entities.Hero;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
 import edu.oakland.cse280.bscd.graphics.models.Map;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
+import edu.oakland.cse280.bscd.quests.MainQuest;
 
 import android.app.Activity;
 import android.content.Context;
@@ -24,6 +25,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private Hero hero;
 	private NPC mayor;
 	private Map map;
+	private MainQuest mainQuest;
 	private UIButtons ui_buttons;
 
 	private Context context;
@@ -40,6 +42,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 0, Settings.TOON_WIDTH, Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", hero.getLocation());
+		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
 	}

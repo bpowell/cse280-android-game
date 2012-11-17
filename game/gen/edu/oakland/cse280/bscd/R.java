@@ -16,8 +16,9 @@ public final class R {
         public static final int dpad=0x7f020002;
         public static final int dpad_part=0x7f020003;
         public static final int hero=0x7f020004;
-        public static final int tiles=0x7f020005;
-        public static final int town=0x7f020006;
+        public static final int mayor=0x7f020005;
+        public static final int tiles=0x7f020006;
+        public static final int town=0x7f020007;
     }
     public static final class layout {
         public static final int main=0x7f030000;
