@@ -15,9 +15,10 @@ public final class R {
         public static final int b_button=0x7f020001;
         public static final int dpad=0x7f020002;
         public static final int dpad_part=0x7f020003;
-        public static final int hero=0x7f020004;
-        public static final int tiles=0x7f020005;
-        public static final int town=0x7f020006;
+        public static final int dungeon=0x7f020004;
+        public static final int hero=0x7f020005;
+        public static final int tiles=0x7f020006;
+        public static final int town=0x7f020007;
     }
     public static final class id {
         public static final int cancelDelete=0x7f050003;
@@ -33,6 +34,7 @@ public final class R {
         public static final int delete=0x7f030000;
         public static final int load_screen=0x7f030001;
         public static final int main=0x7f030002;
+        public static final int splash=0x7f030003;
     }
     public static final class string {
         public static final int app_name=0x7f040000;
