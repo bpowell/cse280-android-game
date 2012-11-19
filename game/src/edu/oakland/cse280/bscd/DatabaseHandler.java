@@ -10,6 +10,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
  
 public class DatabaseHandler extends SQLiteOpenHelper {
  
@@ -27,6 +28,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_LEVEL = "level";
+    private static final String KEY_VIT = "vit";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -36,7 +38,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {String CREATE_HEROS_TABLE = "CREATE TABLE " + TABLE_HEROS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_LEVEL + " TEXT" + ")";
+                + KEY_LEVEL + " TEXT," + KEY_VIT + " TEXT" + ")";
         db.execSQL(CREATE_HEROS_TABLE);
     }
  
@@ -59,9 +61,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
  
         ContentValues values = new ContentValues();
-        values.put(KEY_ID, hero.getId());
+        values.put(KEY_ID, hero.getId()); // Hero ID
         values.put(KEY_NAME, hero.getName()); // Hero Name
-        values.put(KEY_LEVEL, hero.getLevel()); // Hero Phone
+        values.put(KEY_LEVEL, hero.getLevel()); // Hero Level
+        values.put(KEY_VIT, hero.getVit());// hero vitality
  
         // Inserting Row
         db.insert(TABLE_HEROS, null, values);
@@ -69,16 +72,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     }
  
     // Getting single hero
-    Hero getContact(int id) {
+    Hero getHero(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
  
         Cursor cursor = db.query(TABLE_HEROS, new String[] { KEY_ID,
-                KEY_NAME, KEY_LEVEL }, KEY_ID + "=?",
+                KEY_NAME, KEY_LEVEL, KEY_VIT }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
  
-        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)));
+        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)));
         // return hero
         db.close();
         return hero;
@@ -92,14 +95,16 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
- 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
+                for(int i=0;i<10;i++)
+                    Log.i("ajdfjaihfhwaedrfahwfoawofedjwa", ""+Integer.parseInt(cursor.getString(3)));
                 Hero hero = new Hero();
                 hero.setId(Integer.parseInt(cursor.getString(0)));
                 hero.setName(cursor.getString(1));
                 hero.setLevel(Integer.parseInt(cursor.getString(2)));
+                hero.setVit(Integer.parseInt(cursor.getString(3)));
                 // Adding hero to list
                 heroList.add(hero);
             } while (cursor.moveToNext());
@@ -118,6 +123,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_ID, hero.getId());
         values.put(KEY_NAME, hero.getName());
         values.put(KEY_LEVEL, hero.getLevel());
+        values.put(KEY_VIT, hero.getVit());
  
         // updating row
         return db.update(TABLE_HEROS, values, KEY_ID + " = ?",

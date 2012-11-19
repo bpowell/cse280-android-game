@@ -63,17 +63,17 @@ public class LoadScreen extends Activity
             {
                 case 1:
                 {
-                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
                 case 2:
                 {
-                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
                 case 3:
                 {
-                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
             }
@@ -104,9 +104,19 @@ public class LoadScreen extends Activity
     public void save1(View view)
     {
         if(hero1 == null) // add a new hero to the database if it is a new game
-            db.addHero(new Hero(1, "hero1", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save1 ", "was Clicked");
+            //hero(id, name, level, vit)
+            db.addHero(new Hero(1, "hero1", 1, 5));
+    
+        // print out database for debuggin purposes
+        List<Hero> heros = db.getAllHeros();       
+ 
+        for (Hero h : heros)
+        { 
+            String log = "Id: "+h.getId()+", Name: " + h.getName() + ", Level: " + h.getLevel() + ", Vitality: " + h.getVit();
+            for(int i=0;i<10;i++)
+                Log.d("Name: ", log);
+        }
+        // end debuging
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
         this.finish();
@@ -115,9 +125,20 @@ public class LoadScreen extends Activity
     public void save2(View view)
     {
         if(hero2 == null)// add a new hero to the database if it is a new game
-            db.addHero(new Hero(2, "hero2", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save2 ", "was Clicked");
+            //hero(id, name, level, vit)
+            db.addHero(new Hero(2, "hero2", 1, 5));
+
+         // print out database for debuggin purposes
+        List<Hero> heros = db.getAllHeros();       
+ 
+        for (Hero h : heros)
+        { 
+            String log = "Id: "+h.getId()+", Name: " + h.getName() + ", Level: " + h.getLevel() + ", Vitality: " + h.getVit();
+        
+            for(int i=0;i<10;i++)
+                Log.d("Name: ", log);
+        } // end debuging
+
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
         this.finish();
@@ -126,9 +147,20 @@ public class LoadScreen extends Activity
     public void save3(View view)
     { 
         if(hero3 == null)// add a new hero to the database if it is a new game
-            db.addHero(new Hero(3, "hero3", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save3 ", "was Clicked");
+            //hero(id, name, level, vit)
+            db.addHero(new Hero(3, "hero3", 1, 5));
+
+         // print out database for debuggin purposes
+        List<Hero> heros = db.getAllHeros();       
+ 
+        for (Hero h : heros)
+        { 
+            String log = "Id: "+h.getId()+", Name: " + h.getName() + ", Level: " + h.getLevel() + ", Vitality: " + h.getVit();
+        
+            for(int i=0;i<10;i++)
+                Log.d("Name: ", log);
+        }// end debuging
+
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
         this.finish();
