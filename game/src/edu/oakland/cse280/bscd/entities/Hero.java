@@ -84,8 +84,8 @@ public class Hero extends Mob
     public void setVit(int v)
     {
         for(int i=0;i<10;i++)
-            Log.i("vit was set to ", ""+vit);
-        this.vit = vit;
+            Log.i("vit was set to ", ""+v);
+        this.vit = v;
     }
 
     public void setHP(int hp)
