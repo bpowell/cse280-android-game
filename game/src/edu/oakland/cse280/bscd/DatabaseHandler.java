@@ -80,7 +80,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
  
         Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)));
         // return hero
-        db.close();
         return hero;
     }
  
@@ -104,8 +103,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 heroList.add(hero);
             } while (cursor.moveToNext());
         }
-        db.close();
-        cursor.close();
+ 
         // return hero list
         return heroList;
     }
@@ -137,10 +135,10 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String countQuery = "SELECT  * FROM " + TABLE_HEROS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
-        int count = cursor.getCount();
         cursor.close();
+ 
         // return count
-        return count;
+        return cursor.getCount();
     }
  
 }
