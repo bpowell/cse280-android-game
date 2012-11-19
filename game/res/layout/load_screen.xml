@@ -66,6 +66,25 @@
                 android:layout_height="wrap_content" 
                 android:textColor="#000"/>
         </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="2px"/>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="50dp"
+            android:background="#fff"
+            android:onClick="delete"
+            android:layout_height="50dp">
+            <TextView  
+                android:id="@+id/delete"
+                android:layout_width="fill_parent" 
+                android:layout_height="wrap_content" 
+                android:text="Delete Game"
+                android:textColor="#000"/>
+        </LinearLayout>
+
 
 </LinearLayout>
 
