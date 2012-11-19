@@ -1,6 +1,7 @@
 package edu.oakland.cse280.bscd;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,4 +19,12 @@ public class MainGameActivity extends Activity
 
 		setContentView(new Game(this));
 	}
+
+    @Override
+    public void onBackPressed()
+    {
+        Intent intent = new Intent(MainGameActivity.this, LoadScreen.class);
+        startActivity(intent);
+        this.finish();
+    }
 }

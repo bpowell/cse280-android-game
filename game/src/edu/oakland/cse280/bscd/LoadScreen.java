@@ -113,6 +113,7 @@ public class LoadScreen extends Activity
         // end debuging
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
+        this.finish();
     }
     
     public void save2(View view)
@@ -134,6 +135,7 @@ public class LoadScreen extends Activity
 
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
+        this.finish();
     }
 
     public void save3(View view)
@@ -155,6 +157,7 @@ public class LoadScreen extends Activity
 
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
         startActivity(i);
+        this.finish();
     }
 
     public void delete(View view)
