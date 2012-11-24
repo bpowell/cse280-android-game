@@ -31,6 +31,7 @@ public class Map
 	private ArrayList<Tile> tiles;
 	private ArrayList<Tile> loaded_tiles;
 	private ArrayList<Integer> non_passable_tiles;
+	private ArrayList<Teleport> teleport;
 
 	private Rect player_location;
 
@@ -44,6 +45,7 @@ public class Map
 
 		loaded_tiles = new ArrayList<Tile>();
 		non_passable_tiles = new ArrayList<Integer>();
+		teleport = new ArrayList<Teleport>();
 
 		open_map_file();
 		read_data();
@@ -94,8 +96,25 @@ public class Map
 			non_passable_tiles.add(Integer.parseInt(tmp[i]));
 		}
 
-		MAP_WIDTH = Integer.parseInt(data[3].split(",")[0]);
-		MAP_HEIGHT = Integer.parseInt(data[3].split(",")[1]);
+		String tele[] = data[3].split(":");
+		for(i=0; i<tele.length; i++)
+		{
+			String info[] = tele[i].split(",");
+			int tx, ty;
+			String tm;
+			int hx, hy;
+
+			tx=Integer.parseInt(info[0]);
+			ty=Integer.parseInt(info[1]);
+			tm=info[2];
+			hx=Integer.parseInt(info[3]);
+			hy=Integer.parseInt(info[4]);
+
+			teleport.add(new Teleport(tx,ty,tm,hx,hy));
+		}
+
+		MAP_WIDTH = Integer.parseInt(data[4].split(",")[0]);
+		MAP_HEIGHT = Integer.parseInt(data[4].split(",")[1]);
 
 		map_id = context.getResources().getIdentifier(tileset_name, "drawable", context.getPackageName());
 	}
@@ -109,7 +128,7 @@ public class Map
 
 		int i, j;
 		tiles = new ArrayList<Tile>();
-		for(i=4; i<data.length; i++)
+		for(i=5; i<data.length; i++)
 		{
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
@@ -164,5 +183,10 @@ public class Map
 	public ArrayList getNon_passable_tiles()
 	{
 		return non_passable_tiles;
+	}
+
+	public ArrayList getTeleports()
+	{
+		return teleport;
 	}
 }

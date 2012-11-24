@@ -2,3 +2,4 @@ local.properties
 bin/*
 gen/*
 .*swp
+gen/edu/oakland/cse280/bscd/R.java
