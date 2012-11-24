@@ -3,6 +3,7 @@ package edu.oakland.cse280.bscd.graphics.entities;
 import edu.oakland.cse280.bscd.Settings;
 import edu.oakland.cse280.bscd.Physics;
 import edu.oakland.cse280.bscd.graphics.models.Tile;
+import edu.oakland.cse280.bscd.graphics.models.Teleport;
 
 import android.graphics.Canvas;
 import android.graphics.Bitmap;
@@ -21,8 +22,10 @@ public class Hero extends Mobs
 		old_location = starting_position;
 	}
 
-	public synchronized void move(int x, int y, int direction, ArrayList<Tile> tiles, ArrayList<Integer> blocking)
+	public synchronized Teleport move(int x, int y, int direction, ArrayList<Tile> tiles, ArrayList<Integer> blocking, ArrayList<Teleport> teleport)
 	{
+		Teleport t = null;
+
 		old_location = new Rect(location);
 
 		location.left += x;
@@ -41,9 +44,17 @@ public class Hero extends Mobs
 					Log.d("SHFSDHFKSDJHFSKDHF", "SHOULD BE MOVED BACK: " + tile.getType() + "," );
 				}
 			}
+
+			for(Teleport tele : teleport)
+			{
+				if(Physics.check_collision(tele.getTile(), location))
+					t = tele;
+			}
 		}
 
 		this.direction = direction;
+
+		return t;
 	}
 
 	public void draw(Canvas canvas)

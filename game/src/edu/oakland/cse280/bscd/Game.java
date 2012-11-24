@@ -3,6 +3,7 @@ package edu.oakland.cse280.bscd;
 import edu.oakland.cse280.bscd.graphics.entities.Hero;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
 import edu.oakland.cse280.bscd.graphics.models.Map;
+import edu.oakland.cse280.bscd.graphics.models.Teleport;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
 import edu.oakland.cse280.bscd.quests.MainQuest;
 
@@ -98,19 +99,27 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		x = (int)event.getX();
 		y = (int)event.getY();
 
+		Teleport t = null;
+
 		if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_MOVE)
 		{
 			synchronized(this)
 			{
 				if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+					t = hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 				else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+					t = hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 				else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles());
+					t = hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 				else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles());
+					t = hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 			}
+		}
+
+		if(t!=null)
+		{
+			Log.d("dadasdasda", "SDFDSKLFJSDLKFJSLDFJLSDKFJLSKDJFLSDKFJSLD");
+			map = new Map(context, t.getMap(), t.getHero());
 		}
 		return true;
 	}
