@@ -40,7 +40,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		this.context = context;
 
-		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 0, Settings.TOON_WIDTH, Settings.TOON_HEIGHT));
+		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", hero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);
@@ -118,7 +118,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		if(t!=null)
 		{
-			Log.d("dadasdasda", "SDFDSKLFJSDLKFJSLDFJLSDKFJLSKDJFLSDKFJSLD");
+			hero.setLocation(t.getHero());
 			map = new Map(context, t.getMap(), t.getHero());
 		}
 		return true;
