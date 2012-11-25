@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+        <TextView  
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:text="Welcome to the game!!"
+            />
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="2px"/>
+
+        <Button
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:onClick="save1Delete"
+            android:text="Delete save1"
+            android:background="#fff"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="2px"/>
+
+        <Button
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:background="#fff"
+            android:text="Delete save2"
+            android:onClick="save2Delete"
+            android:layout_height="50dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="2px"/>
+
+        <Button
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:background="#fff"
+            android:text="Delete save3"
+            android:onClick="save3Delete"
+            android:layout_height="50dp"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="2px"/>
+
+        <Button
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:background="#fff"
+            android:text="Cancel"
+            android:onClick="cancelDelete"
+            android:layout_height="50dp"/>
+          
+</LinearLayout>
+
