@@ -97,9 +97,21 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
+		int x,y;
+		x = (int)event.getX();
+		y = (int)event.getY();
 
 		if( IS_FIGHTING )
 		{
+			Rect f = fight_ui.getFIGHT_LOC();
+			Rect i = fight_ui.getITEM_LOC();
+			Rect r = fight_ui.getRUN_LOC();
+
+			if(event.getAction() == MotionEvent.ACTION_DOWN)
+			{
+				if(r.intersect(x,y,x+20,y+20))
+					IS_FIGHTING = false;
+			}
 		}
 		else
 		{
@@ -112,10 +124,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			Rect b = ui_buttons.get_B();
 
 			boolean check_fight = false;
-
-			int x,y;
-			x = (int)event.getX();
-			y = (int)event.getY();
 
 			Teleport t = null;
 
