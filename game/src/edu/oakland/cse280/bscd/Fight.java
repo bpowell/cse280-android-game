@@ -1,5 +1,7 @@
 package edu.oakland.cse280.bscd;
 
+import java.util.Random;
+
 public class Fight
 {
 	public boolean check_for_fight(int fight_chance)
