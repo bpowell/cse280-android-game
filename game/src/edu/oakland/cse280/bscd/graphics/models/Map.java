@@ -131,12 +131,13 @@ public class Map
 
 		int i, j;
 		tiles = new ArrayList<Tile>();
-		for(i=6; i<data.length; i++)
+		int start = 6;
+		for(i=start; i<data.length; i++)
 		{
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
 			{
-				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*settings.TILE_WIDTH, (i-4)*settings.TILE_HEIGHT, (j*settings.TILE_WIDTH)+settings.TILE_WIDTH, ((i-4)*settings.TILE_HEIGHT)+settings.TILE_HEIGHT)));
+				tiles.add(new Tile(Integer.parseInt(t[j]), new Rect(j*settings.TILE_WIDTH, (i-start)*settings.TILE_HEIGHT, (j*settings.TILE_WIDTH)+settings.TILE_WIDTH, ((i-start)*settings.TILE_HEIGHT)+settings.TILE_HEIGHT)));
 			}
 		}
 	}
