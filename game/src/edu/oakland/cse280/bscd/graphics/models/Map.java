@@ -32,6 +32,7 @@ public class Map
 	private ArrayList<Tile> loaded_tiles;
 	private ArrayList<Integer> non_passable_tiles;
 	private ArrayList<Teleport> teleport;
+	private int fight_chance;
 
 	private Rect player_location;
 
@@ -113,8 +114,10 @@ public class Map
 			teleport.add(new Teleport(tx,ty,tm,hx,hy));
 		}
 
-		MAP_WIDTH = Integer.parseInt(data[4].split(",")[0]);
-		MAP_HEIGHT = Integer.parseInt(data[4].split(",")[1]);
+		fight_chance = Integer.parseInt(data[4]);
+
+		MAP_WIDTH = Integer.parseInt(data[5].split(",")[0]);
+		MAP_HEIGHT = Integer.parseInt(data[5].split(",")[1]);
 
 		map_id = context.getResources().getIdentifier(tileset_name, "drawable", context.getPackageName());
 	}
@@ -128,7 +131,7 @@ public class Map
 
 		int i, j;
 		tiles = new ArrayList<Tile>();
-		for(i=5; i<data.length; i++)
+		for(i=6; i<data.length; i++)
 		{
 			String t[] = data[i].split(" ");
 			for(j=0; j<t.length; j++)
@@ -188,5 +191,15 @@ public class Map
 	public ArrayList getTeleports()
 	{
 		return teleport;
+	}
+
+	public int getFight_chance()
+	{
+		return this.fight_chance;
+	}
+
+	public void setFight_chance(int  fight_chance)
+	{
+		this.fight_chance = fight_chance;
 	}
 }
