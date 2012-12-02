@@ -86,17 +86,17 @@ public class FightUI
 		
 	}
 
-	public Rect getfIGHT_LOC()
+	public Rect getFIGHT_LOC()
 	{
 		return this.FIGHT_LOC;
 	}
 
-	public Rect getiTEM_LOC()
+	public Rect getITEM_LOC()
 	{
 		return this.ITEM_LOC;
 	}
 
-	public Rect getrUN_LOC()
+	public Rect getRUN_LOC()
 	{
 		return this.RUN_LOC;
 	}
