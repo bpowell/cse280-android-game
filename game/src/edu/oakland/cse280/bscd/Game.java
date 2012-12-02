@@ -54,7 +54,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
-		fight = new Fight();
+		fight = new Fight(context);
 
 		IS_FIGHTING = false;
 	}
