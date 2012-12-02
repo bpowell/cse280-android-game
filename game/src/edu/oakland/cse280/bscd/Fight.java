@@ -83,4 +83,12 @@ public class Fight
 
 		return false;
 	}
+
+	public EnemyMob fight_who()
+	{
+		Random r = new Random();
+		int who = r.nextInt(enemyMob.size());
+
+		return enemyMob.get(who);
+	}
 }
