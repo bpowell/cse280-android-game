@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.Paint;
 
-public class Fight
+public class FightUI
 {
 	private String FIGHT;
 	private String ITEM;
@@ -24,7 +24,7 @@ public class Fight
 	private Rect ITEM_LOC;
 	private Rect RUN_LOC;
 
-	public Fight()
+	public FightUI()
 	{
 		FIGHT = "Fight";
 		ITEM = "Item";

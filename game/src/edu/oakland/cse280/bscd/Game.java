@@ -5,7 +5,7 @@ import edu.oakland.cse280.bscd.graphics.entities.NPC;
 import edu.oakland.cse280.bscd.graphics.models.Map;
 import edu.oakland.cse280.bscd.graphics.models.Teleport;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
-import edu.oakland.cse280.bscd.graphics.UI.Fight;
+import edu.oakland.cse280.bscd.graphics.UI.FightUI;
 import edu.oakland.cse280.bscd.quests.MainQuest;
 
 import android.app.Activity;
@@ -20,6 +20,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -29,7 +30,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private Map map;
 	private MainQuest mainQuest;
 	private UIButtons ui_buttons;
-	private Fight fight;
+	private FightUI fight;
 
 	private Context context;
 	private int SCREEN_WDITH;
@@ -42,7 +43,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		this.context = context;
 
-		fight = new Fight();
+		fight = new FightUI();
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", hero.getLocation());
