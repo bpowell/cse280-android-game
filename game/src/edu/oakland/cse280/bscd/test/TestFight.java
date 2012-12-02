@@ -14,7 +14,7 @@ public class TestFight
 
         // strength, attack, defense, vit 
         Hero hero = new Hero(1, "Bob",10, 10, 10, 10);
-        EnemyMob enemy = new EnemyMob(1, "Wilber", 10, 9, 10, 10, 2, 20, 201, 50);
+        EnemyMob enemy = new EnemyMob(1, "Wilber", 10, 9, 10, 10, 2, 20, 201, 0,0,0);
         // attack, strength, min, max
         Weapon weapon = new Weapon(5, 10, 3, 15);
         // vit, defense, min, max
