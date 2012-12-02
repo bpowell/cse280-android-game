@@ -1,7 +1,9 @@
 package edu.oakland.cse280.bscd.graphics.UI;
 
 import android.graphics.Canvas;
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.Paint;
 
@@ -24,7 +26,9 @@ public class FightUI
 	private Rect ITEM_LOC;
 	private Rect RUN_LOC;
 
-	public FightUI()
+	private Context context;
+
+	public FightUI(Context context)
 	{
 		FIGHT = "Fight";
 		ITEM = "Item";
@@ -44,6 +48,16 @@ public class FightUI
 		HERO_HP = "00";
 		MOB_HP = "00";
 		mob_paint = null;
+		MOB_IMG = null;
+	}
+
+	public void setup_fight(String name, String mob_hp, String hero_hp)
+	{
+		this.MOB_HP = mob_hp;
+		this.HERO_HP = hero_hp;
+
+		int enemy_id = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
+		MOB_IMG =  BitmapFactory.decodeResource(context.getResources(), enemy_id);
 	}
 
 	public void draw(Canvas canvas)
@@ -81,8 +95,9 @@ public class FightUI
 				clip.top + 2 * text_height, text_style);
 
 		//Mob image
-		//canvas.drawBitmap(MOB_IMG, clip.left+ text_width + hp_offset,
-				//clip.top + hp_offset, mob_paint);
+		if(MOB_IMG != null)
+			canvas.drawBitmap(MOB_IMG, clip.left+ text_width + hp_offset,
+				clip.top + hp_offset, mob_paint);
 		
 	}
 
