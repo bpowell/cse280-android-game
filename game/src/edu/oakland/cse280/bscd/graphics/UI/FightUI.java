@@ -85,4 +85,19 @@ public class FightUI
 				//clip.top + hp_offset, mob_paint);
 		
 	}
+
+	public Rect getfIGHT_LOC()
+	{
+		return this.FIGHT_LOC;
+	}
+
+	public Rect getiTEM_LOC()
+	{
+		return this.ITEM_LOC;
+	}
+
+	public Rect getrUN_LOC()
+	{
+		return this.RUN_LOC;
+	}
 }

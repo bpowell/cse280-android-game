@@ -30,11 +30,14 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private Map map;
 	private MainQuest mainQuest;
 	private UIButtons ui_buttons;
-	private FightUI fight;
+	private FightUI fight_ui;
+	private Fight fight;
 
 	private Context context;
 	private int SCREEN_WDITH;
 	private int SCREEN_HEIGHT;
+
+	private boolean IS_FIGHTING;
 
 	public Game(Context context)
 	{
@@ -43,13 +46,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		this.context = context;
 
-		fight = new FightUI();
+		fight_ui = new FightUI();
+
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", hero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
+		fight = new Fight();
+
+		IS_FIGHTING = false;
 	}
 
 	@Override
@@ -91,40 +98,55 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	public boolean onTouchEvent(MotionEvent event)
 	{
 
-		Rect dleft = ui_buttons.get_DLEFT();
-		Rect dright = ui_buttons.get_DRIGHT();
-		Rect dtop  = ui_buttons.get_DTOP();
-		Rect dbottom = ui_buttons.get_DBOTTOM();
-
-		Rect a = ui_buttons.get_A();
-		Rect b = ui_buttons.get_B();
-
-		int x,y;
-		x = (int)event.getX();
-		y = (int)event.getY();
-
-		Teleport t = null;
-
-		if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_MOVE)
+		if( IS_FIGHTING )
 		{
-			synchronized(this)
+		}
+		else
+		{
+			Rect dleft = ui_buttons.get_DLEFT();
+			Rect dright = ui_buttons.get_DRIGHT();
+			Rect dtop  = ui_buttons.get_DTOP();
+			Rect dbottom = ui_buttons.get_DBOTTOM();
+
+			Rect a = ui_buttons.get_A();
+			Rect b = ui_buttons.get_B();
+
+			boolean check_fight = false;
+
+			int x,y;
+			x = (int)event.getX();
+			y = (int)event.getY();
+
+			Teleport t = null;
+
+			if(event.getAction() == MotionEvent.ACTION_DOWN || event.getAction()==MotionEvent.ACTION_MOVE)
 			{
-				if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					t = hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
-				else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					t = hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
-				else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					t = hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
-				else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-					t = hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+				synchronized(this)
+				{
+					if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+						t = hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+					else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+						t = hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+					else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+						t = hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+					else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
+						t = hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+				
+					check_fight = fight.check_for_fight(map.getFight_chance());
+				}
+			}
+
+			if(t!=null)
+			{
+				hero.setLocation(t.getHero());
+				map = new Map(context, t.getMap(), t.getHero());
+			}
+			else
+			{
+				IS_FIGHTING = check_fight;
 			}
 		}
 
-		if(t!=null)
-		{
-			hero.setLocation(t.getHero());
-			map = new Map(context, t.getMap(), t.getHero());
-		}
 		return true;
 	}
 
@@ -135,35 +157,43 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			return;
 
 		canvas.drawColor(Color.WHITE);
-		int top, left;
 
-		Rect hero_location = hero.getLocation();
-		Rect canvas_rect = canvas.getClipBounds();
-		int mwidth = map.getWidth();
-		int mheight = map.getHeight();
-
-		if(hero_location.bottom >= mheight)
-			top = -(mheight-2*Settings.TILE_HEIGHT);
-		else if(hero_location.top <= (canvas.getHeight()/2))
-			top = 0;
+		if( IS_FIGHTING )
+		{
+			fight_ui.draw(canvas);
+		}
 		else
-			top = -(hero_location.top-(canvas.getHeight()/2));
+		{
 
-		if(hero_location.right >= mwidth)
-			left = -(mwidth-2*Settings.TILE_WIDTH);
-		else if(hero_location.left <= (canvas.getWidth()/2))
-			left = 0;
-		else
-			left = -(hero_location.left-(canvas.getWidth()/2));
+			int top, left;
+
+			Rect hero_location = hero.getLocation();
+			Rect canvas_rect = canvas.getClipBounds();
+			int mwidth = map.getWidth();
+			int mheight = map.getHeight();
+
+			if(hero_location.bottom >= mheight)
+				top = -(mheight-2*Settings.TILE_HEIGHT);
+			else if(hero_location.top <= (canvas.getHeight()/2))
+				top = 0;
+			else
+				top = -(hero_location.top-(canvas.getHeight()/2));
+
+			if(hero_location.right >= mwidth)
+				left = -(mwidth-2*Settings.TILE_WIDTH);
+			else if(hero_location.left <= (canvas.getWidth()/2))
+				left = 0;
+			else
+				left = -(hero_location.left-(canvas.getWidth()/2));
 
 
-		//canvas.translate(-(hero_location.left-(canvas.getWidth()/2)), -(hero_location.top-(canvas.getHeight()/2)));
-		canvas.translate(left, top);
+			//canvas.translate(-(hero_location.left-(canvas.getWidth()/2)), -(hero_location.top-(canvas.getHeight()/2)));
+			canvas.translate(left, top);
 
-		map.draw(canvas);
-		mayor.draw(canvas);
-		ui_buttons.draw(canvas);
-		hero.draw(canvas);
-		fight.draw(canvas);
+			map.draw(canvas);
+			mayor.draw(canvas);
+			ui_buttons.draw(canvas);
+			hero.draw(canvas);
+		}
 	}
 }

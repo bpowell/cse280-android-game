@@ -13,13 +13,20 @@ public final class R {
     public static final class drawable {
         public static final int a_button=0x7f020000;
         public static final int b_button=0x7f020001;
-        public static final int dpad=0x7f020002;
-        public static final int dpad_part=0x7f020003;
-        public static final int dungeon_castle=0x7f020004;
-        public static final int hero=0x7f020005;
-        public static final int mayor=0x7f020006;
-        public static final int tiles=0x7f020007;
-        public static final int town=0x7f020008;
+        public static final int black_dragon=0x7f020002;
+        public static final int blobfish=0x7f020003;
+        public static final int blobfish3_1=0x7f020004;
+        public static final int dpad=0x7f020005;
+        public static final int dpad_part=0x7f020006;
+        public static final int dungeon_castle=0x7f020007;
+        public static final int eye_ball=0x7f020008;
+        public static final int guy1=0x7f020009;
+        public static final int guy2=0x7f02000a;
+        public static final int hero=0x7f02000b;
+        public static final int mayor=0x7f02000c;
+        public static final int princess=0x7f02000d;
+        public static final int tiles=0x7f02000e;
+        public static final int town=0x7f02000f;
     }
     public static final class id {
         public static final int delete=0x7f050003;
