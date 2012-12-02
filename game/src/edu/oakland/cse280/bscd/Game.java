@@ -46,7 +46,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		this.context = context;
 
-		fight_ui = new FightUI();
+		fight_ui = new FightUI(context);
 
 		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
