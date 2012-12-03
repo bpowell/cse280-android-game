@@ -19,6 +19,7 @@ public class Hero extends Mob implements Serializable
     private int maxHP;
     private int X;
     private int Y;
+    private String map;
     private boolean isAlive = true;
     private final int LEVEL_1 = 100;
     private final int LEVEL_2 = 200;
@@ -37,7 +38,7 @@ public class Hero extends Mob implements Serializable
     private int bootDefense = 0;
     private int level = 1;
 
-    public Hero(int id, String name, int level, int vit, int strength, int attack, int defense, int X, int Y)
+    public Hero(int id, String name, int level, int vit, int strength, int attack, int defense, int X, int Y, String map)
     {
         super(id, name);
         this.strength = strength;
@@ -48,6 +49,7 @@ public class Hero extends Mob implements Serializable
         this.hp = maxHP;
         this.X = X;
         this.Y = Y;
+        this.map = map;
     }
     
     public Hero(int id, String name, int level, int vit)
@@ -141,6 +143,10 @@ public class Hero extends Mob implements Serializable
         this.Y = Y;
     }
 
+    public void setMap(String map)
+    {
+        this.map = map;
+    }
     public int getAttack()
     {
 
@@ -180,6 +186,11 @@ public class Hero extends Mob implements Serializable
     {
 
         return this.Y;
+    }
+
+    public String getMap()
+    {
+        return this.map;
     }
 
     public int doDamage(int min, int max, int enemyStrength)

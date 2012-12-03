@@ -99,7 +99,7 @@ public class LoadScreen extends Activity
     {
         if(hero1 == null) // add a new hero to the database if it is a new game
             //hero(id, name, level, vit, strength, attack, defense, X, Y)
-            db.addHero(new Hero(1, "hero1", 1, 5, 10, 10, 10, 0, 0));
+            db.addHero(new Hero(1, "hero1", 1, 5, 10, 10, 10, 0, 0, "map02.txt"));
         hero1 = db.getHero(1);
         // print out database for debuggin purposes
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
@@ -112,7 +112,7 @@ public class LoadScreen extends Activity
     {
         if(hero2 == null)// add a new hero to the database if it is a new game
             //hero(id, name, level, vit, strength, attack, defense, X, Y)
-            db.addHero(new Hero(2, "hero2", 1, 5, 10, 10, 10, 0, 0));
+            db.addHero(new Hero(2, "hero2", 1, 5, 10, 10, 10, 0, 0, "map02.txt"));
         hero2 = db.getHero(2);
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
             .putExtra("hero", hero2);                      
@@ -124,7 +124,7 @@ public class LoadScreen extends Activity
     {
         if(hero3 == null)// add a new hero to the database if it is a new game
             //hero(id, name, level, vit, strength, attack, defense, X, Y)
-            db.addHero(new Hero(3, "hero3", 1, 5, 10, 10, 10, 0, 0));
+            db.addHero(new Hero(3, "hero3", 1, 5, 10, 10, 10, 0, 0, "map02.txt"));
         hero3 = db.getHero(3);
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
             .putExtra("hero", hero3);                      

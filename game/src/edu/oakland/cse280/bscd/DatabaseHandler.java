@@ -34,6 +34,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_DEFENSE = "defense";
     private static final String KEY_X = "X";
     private static final String KEY_Y = "Y";
+    private static final String KEY_MAP = "map";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,7 +45,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {String CREATE_HEROS_TABLE = "CREATE TABLE " + TABLE_HEROS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
                 + KEY_LEVEL + " TEXT," + KEY_VIT + " TEXT," + KEY_STRENGTH + " TEXT," + KEY_ATTACK + " TEXT,"
-                + KEY_DEFENSE + " TEXT," + KEY_X + " TEXT," + KEY_Y + " TEXT" + ")";
+                + KEY_DEFENSE + " TEXT," + KEY_X + " TEXT," + KEY_Y + " TEXT," + KEY_MAP + " TEXT" + ")";
         db.execSQL(CREATE_HEROS_TABLE);
     }
  
@@ -76,6 +77,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEFENSE, hero.getDefense());// hero defense 
         values.put(KEY_X, hero.getX());// hero X 
         values.put(KEY_Y, hero.getY());// hero Y 
+        values.put(KEY_MAP, hero.getMap());// hero Y 
  
         // Inserting Row
         db.insert(TABLE_HEROS, null, values);
@@ -87,12 +89,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
  
         Cursor cursor = db.query(TABLE_HEROS, new String[] { KEY_ID,
-                KEY_NAME, KEY_LEVEL, KEY_VIT, KEY_STRENGTH, KEY_ATTACK, KEY_DEFENSE, KEY_X, KEY_Y }, KEY_ID + "=?",
+                KEY_NAME, KEY_LEVEL, KEY_VIT, KEY_STRENGTH, KEY_ATTACK, KEY_DEFENSE, KEY_X, KEY_Y, KEY_MAP }, KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
  
-        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)), Integer.parseInt(cursor.getString(6)), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)));
+        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)), Integer.parseInt(cursor.getString(6)), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)), cursor.getString(9));
         // return hero
         return hero;
     }
@@ -118,6 +120,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 hero.setDefense(Integer.parseInt(cursor.getString(6)));
                 hero.setX(Integer.parseInt(cursor.getString(7)));
                 hero.setY(Integer.parseInt(cursor.getString(8)));
+                hero.setMap(cursor.getString(9));
                 // Adding hero to list
                 heroList.add(hero);
             } while (cursor.moveToNext());
@@ -140,6 +143,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_DEFENSE, hero.getDefense());
         values.put(KEY_X, hero.getX());
         values.put(KEY_Y, hero.getY());
+        values.put(KEY_MAP, hero.getMap());
  
         // updating row
         return db.update(TABLE_HEROS, values, KEY_ID + " = ?",
