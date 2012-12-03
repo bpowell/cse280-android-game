@@ -116,6 +116,21 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			{
 				if(r.intersect(x,y,x+20,y+20))
 					IS_FIGHTING = false;
+				else if(f.intersect(x,y,x+20,y+20))
+				{
+					if(enemy.getAttack()>hero.getAttack())
+					{
+						hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
+						enemy.doDamage(1, 10, hero.getStrength());
+					}
+					else
+					{
+						enemy.doDamage(1, 10, hero.getStrength());
+						hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
+					}
+
+					fight.update_fight(fight_ui, Integer.toString(enemy.getHP()), Integer.toString(hero.getHP()));
+				}
 			}
 		}
 		else

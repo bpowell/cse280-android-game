@@ -3,6 +3,7 @@ package edu.oakland.cse280.bscd;
 import edu.oakland.cse280.bscd.entities.EnemyMob;
 
 import edu.oakland.cse280.bscd.graphics.UI.FightUI;
+import edu.oakland.cse280.bscd.entities.Hero;
 
 import android.content.Context;
 import android.util.Log;
@@ -91,7 +92,7 @@ public class Fight
 		Random r = new Random();
 		int who = r.nextInt(enemyMob.size());
 
-		return enemyMob.get(who);
+		return enemyMob.get(who).copy();
 	}
 
 	public EnemyMob prepare_fight(FightUI fightUI, int hero_hp)
@@ -101,7 +102,8 @@ public class Fight
 		return who;
 	}
 
-	public void update_fight(FightUI fightUI, EnemyMob mob, Hero hero)
+	public void update_fight(FightUI fightUI, String mob, String hero)
 	{
+		fightUI.update(mob, hero);
 	}
 }

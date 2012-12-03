@@ -39,80 +39,77 @@ public class EnemyMob extends Mob
 
     public void setStrength(int s)
     {
-    
         this.strength = s;
     }
 
     public void setAttack(int a)
     {
-
         this.attack = a;
     }
 
     public void setDefense(int d)
     {
-
         this.defense = d;
     }
 
     public void setVit(int v)
     {
-
         this.vit = vit;
     }
 
     public void setMinDamage(int min)
     {
-
         this.minDamage = min;
     }
 
     public void setMaxDamage(int max)
     {
-
         this.maxDamage = max;
     }
 
     public void setHP(int hp)
     {
-
         this.hp = hp;
     }
 
     public int getAttack()
     {
-
         return this.attack;
     }
 
     public int getHP()
     {
-
         return this.hp;
     }
 
     public int getMin()
     {
-
         return this.minDamage;
     }
 
     public int getMax()
     {
-
         return this.maxDamage;
     }
 
     public int getStrength()
     {
-
         return this.strength;
     }
 
     public int getExp()
     {
-
         return expToGive;
+    }
+
+    public int getDefense()
+    {
+        return defense;
+    }
+
+    public int getVit()
+    {
+	return vit;
     }
 
 
@@ -171,5 +168,10 @@ public class EnemyMob extends Mob
 	    this.B = B;;
     }
 
+    public EnemyMob copy()
+    {
+	    EnemyMob a = new EnemyMob(getId(), getName(), getStrength(), getAttack(), getDefense(), getVit(), getMin(), getMax(), getExp(), getR(), getG(), getB());
+	    return a;
+    }
 }
 
