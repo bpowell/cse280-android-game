@@ -14,7 +14,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class Map
+public class Mapp
 {
 	private Settings settings;
 
@@ -38,7 +38,7 @@ public class Map
 
 	private Context context;
 
-	public Map(Context context, String map_name, Rect player_location)
+	public Mapp(Context context, String map_name, Rect player_location)
 	{
 		this.context = context;
 		this.map_name = map_name;

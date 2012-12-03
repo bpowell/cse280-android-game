@@ -4,7 +4,7 @@ import edu.oakland.cse280.bscd.graphics.entities.GHero;
 import edu.oakland.cse280.bscd.entities.Hero;
 import edu.oakland.cse280.bscd.entities.EnemyMob;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
-import edu.oakland.cse280.bscd.graphics.models.Map;
+import edu.oakland.cse280.bscd.graphics.models.Mapp;
 import edu.oakland.cse280.bscd.graphics.models.Teleport;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
 import edu.oakland.cse280.bscd.graphics.UI.FightUI;
@@ -24,6 +24,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
@@ -31,12 +34,12 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private GHero ghero;
 	private Hero hero;
 	private EnemyMob enemy;
-	private NPC mayor;
-	private Map map;
+	private Mapp map;
 	private MainQuest mainQuest;
 	private UIButtons ui_buttons;
 	private FightUI fight_ui;
 	private Fight fight;
+	private Map<String, ArrayList<NPC>> npcs;
 
 	private Context context;
 	private int SCREEN_WDITH;
@@ -53,14 +56,18 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		this.context = context;
 		db_handler = new DatabaseHandler(context);
-
 		fight_ui = new FightUI(context);
-
-
+		npcs = new HashMap<String, ArrayList<NPC>>();
 		this.hero = db_handler.getHero(hero_number);
+
 		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(hero.getX(), hero.getY(), hero.getX()+Settings.TOON_WIDTH, hero.getY()+Settings.TOON_HEIGHT));
-		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
-		map = new Map(context, hero.getMap(), ghero.getLocation());
+
+		NPC mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
+		ArrayList<NPC> n = new ArrayList<NPC>();
+		n.add(mayor);
+		npcs.put("map02.txt", n);
+
+		map = new Mapp(context, hero.getMap(), ghero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
@@ -206,7 +213,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			if(t!=null)
 			{
 				ghero.setLocation(t.getHero());
-				map = new Map(context, t.getMap(), t.getHero());
+				map = new Mapp(context, t.getMap(), t.getHero());
 			}
 			else if(check_fight)
 			{
@@ -259,7 +266,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			canvas.translate(left, top);
 
 			map.draw(canvas);
-			mayor.draw(canvas);
 			ui_buttons.draw(canvas);
 			ghero.draw(canvas);
 		}
