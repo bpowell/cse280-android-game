@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -42,6 +43,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private int SCREEN_HEIGHT;
 
 	private boolean IS_FIGHTING;
+	private boolean DEAD;
+	private boolean WIN;
 
 	public Game(Context context)
 	{
@@ -121,12 +124,36 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 					if(enemy.getAttack()>hero.getAttack())
 					{
 						hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
-						enemy.doDamage(1, 10, hero.getStrength());
+						if(hero.getHP()<=0)
+						{
+							Toast.makeText(context, "You have died...", Toast.LENGTH_LONG).show();
+							IS_FIGHTING = false;
+						}
+						else 
+							enemy.doDamage(1, 10, hero.getStrength());
+
+						if(enemy.getHP()<=0)
+						{
+							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_LONG).show();
+							IS_FIGHTING = false;
+						}
 					}
 					else
 					{
 						enemy.doDamage(1, 10, hero.getStrength());
-						hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
+						if(enemy.getHP()<=0)
+						{
+							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_LONG).show();
+							IS_FIGHTING = false;
+						}
+						else
+							hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
+
+						if(hero.getHP()<=0)
+						{
+							Toast.makeText(context, "You have died...", Toast.LENGTH_LONG).show();
+							IS_FIGHTING = false;
+						}
 					}
 
 					fight.update_fight(fight_ui, Integer.toString(enemy.getHP()), Integer.toString(hero.getHP()));
