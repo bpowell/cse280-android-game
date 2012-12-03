@@ -29,6 +29,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String KEY_NAME = "name";
     private static final String KEY_LEVEL = "level";
     private static final String KEY_VIT = "vit";
+    private static final String KEY_STRENGTH = "strength";
+    private static final String KEY_ATTACK = "attack";
+    private static final String KEY_DEFENSE = "defense";
+    private static final String KEY_X = "X";
+    private static final String KEY_Y = "Y";
  
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -38,7 +43,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {String CREATE_HEROS_TABLE = "CREATE TABLE " + TABLE_HEROS + "("
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_LEVEL + " TEXT," + KEY_VIT + " TEXT" + ")";
+                + KEY_LEVEL + " TEXT," + KEY_VIT + " TEXT" + KEY_STRENGTH + "TEXT" + KEY_ATTACK + "TEXT"
+                + KEY_DEFENSE + "TEXT" + KEY_X + "TEXT" + KEY_Y + "TEXT" + ")";
         db.execSQL(CREATE_HEROS_TABLE);
     }
  
@@ -65,6 +71,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, hero.getName()); // Hero Name
         values.put(KEY_LEVEL, hero.getLevel()); // Hero Level
         values.put(KEY_VIT, hero.getVit());// hero vitality
+        values.put(KEY_STRENGTH, hero.getStrength());// hero vitality
+        values.put(KEY_ATTACK, hero.getAttack());// hero vitality
+        values.put(KEY_DEFENSE, hero.getDefense());// hero vitality
+        values.put(KEY_X, hero.getX());// hero vitality
+        values.put(KEY_Y, hero.getY());// hero vitality
  
         // Inserting Row
         db.insert(TABLE_HEROS, null, values);
@@ -81,7 +92,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
  
-        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)));
+        Hero hero = new Hero(Integer.parseInt(cursor.getString(0)), cursor.getString(1), Integer.parseInt(cursor.getString(2)), Integer.parseInt(cursor.getString(3)), Integer.parseInt(cursor.getString(4)), Integer.parseInt(cursor.getString(5)), Integer.parseInt(cursor.getString(6)), Integer.parseInt(cursor.getString(7)), Integer.parseInt(cursor.getString(8)));
         // return hero
         return hero;
     }
@@ -104,6 +115,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                 hero.setName(cursor.getString(1));
                 hero.setLevel(Integer.parseInt(cursor.getString(2)));
                 hero.setVit(Integer.parseInt(cursor.getString(3)));
+                hero.setStrength(Integer.parseInt(cursor.getString(4)));
+                hero.setAttack(Integer.parseInt(cursor.getString(5)));
+                hero.setDefense(Integer.parseInt(cursor.getString(6)));
+                hero.setX(Integer.parseInt(cursor.getString(7)));
+                hero.setY(Integer.parseInt(cursor.getString(8)));
                 // Adding hero to list
                 heroList.add(hero);
             } while (cursor.moveToNext());
@@ -122,13 +138,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         values.put(KEY_NAME, hero.getName());
         values.put(KEY_LEVEL, hero.getLevel());
         values.put(KEY_VIT, hero.getVit());
+        values.put(KEY_STRENGTH, hero.getStrength());
+        values.put(KEY_ATTACK, hero.getAttack());
+        values.put(KEY_DEFENSE, hero.getDefense());
+        values.put(KEY_X, hero.getX());
+        values.put(KEY_Y, hero.getY());
  
         // updating row
         return db.update(TABLE_HEROS, values, KEY_ID + " = ?",
                 new String[] { String.valueOf(hero.getId()) });
     }
- 
-    // Deleting single hero
+ // Deleting single hero
     public void deleteHero(Hero hero) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_HEROS, KEY_ID + " = ?",

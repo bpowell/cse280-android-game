@@ -16,6 +16,8 @@ public class Hero extends Mob
     private int vit;
     private int hp;
     private int maxHP;
+    private int X;
+    private int Y;
     private boolean isAlive = true;
     private final int LEVEL_1 = 100;
     private final int LEVEL_2 = 200;
@@ -34,7 +36,7 @@ public class Hero extends Mob
     private int bootDefense = 0;
     private int level = 1;
 
-    public Hero(int id, String name, int strength, int attack, int defense, int vit)
+    public Hero(int id, String name, int level, int vit, int strength, int attack, int defense, int X, int Y)
     {
         super(id, name);
         this.strength = strength;
@@ -43,6 +45,8 @@ public class Hero extends Mob
         this.vit = vit;
         this.maxHP = vit * 10;
         this.hp = maxHP;
+        this.X = X;
+        this.Y = Y;
     }
     
     public Hero(int id, String name, int level, int vit)
@@ -124,6 +128,18 @@ public class Hero extends Mob
         this.strength = weapon.getStrength();
     }
 
+    public void setX(int X)
+    {
+
+        this.X = X;
+    }
+
+    public void setY(int Y)
+    {
+
+        this.Y = Y;
+    }
+
     public int getAttack()
     {
 
@@ -151,6 +167,18 @@ public class Hero extends Mob
     public int getVit()
     {
         return this.vit;
+    }
+
+    public int getX()
+    {
+
+        return this.X;
+    }
+
+    public int getY()
+    {
+
+        return this.Y;
     }
 
     public int doDamage(int min, int max, int enemyStrength)
