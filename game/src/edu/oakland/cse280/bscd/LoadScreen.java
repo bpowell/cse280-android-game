@@ -98,8 +98,8 @@ public class LoadScreen extends Activity
     public void save1(View view)
     {
         if(hero1 == null) // add a new hero to the database if it is a new game
-            //hero(id, name, level, vit)
-            db.addHero(new Hero(1, "hero1", 1, 5));
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(1, "hero1", 1, 5, 10, 10, 10, 0, 0));
     
         // print out database for debuggin purposes
         List<Hero> heros = db.getAllHeros();       
@@ -119,8 +119,8 @@ public class LoadScreen extends Activity
     public void save2(View view)
     {
         if(hero2 == null)// add a new hero to the database if it is a new game
-            //hero(id, name, level, vit)
-            db.addHero(new Hero(2, "hero2", 1, 5));
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(2, "hero2", 1, 5, 10, 10, 10, 0, 0));
 
          // print out database for debuggin purposes
         List<Hero> heros = db.getAllHeros();       
@@ -141,8 +141,8 @@ public class LoadScreen extends Activity
     public void save3(View view)
     {
         if(hero3 == null)// add a new hero to the database if it is a new game
-            //hero(id, name, level, vit)
-            db.addHero(new Hero(3, "hero3", 1, 5));
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(3, "hero3", 1, 5, 10, 10, 10, 0, 0));
 
          // print out database for debuggin purposes
         List<Hero> heros = db.getAllHeros();       
