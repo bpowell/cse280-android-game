@@ -97,6 +97,6 @@ public class Fight
 	public void prepare_fight(FightUI fightUI)
 	{
 		EnemyMob who = fight_who();
-		fightUI.setup_fight(who.getName(), Integer.toString(who.getHP()), "100");
+		fightUI.setup_fight(who.getName(), Integer.toString(who.getHP()), "100", who.getR(), who.getG(), who.getB());
 	}
 }

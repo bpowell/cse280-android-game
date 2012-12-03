@@ -6,6 +6,8 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Rect;
 import android.graphics.Paint;
+import android.graphics.ColorFilter;
+import android.graphics.LightingColorFilter;
 
 public class FightUI
 {
@@ -53,10 +55,14 @@ public class FightUI
 		this.context = context;
 	}
 
-	public void setup_fight(String name, String mob_hp, String hero_hp)
+	public void setup_fight(String name, String mob_hp, String hero_hp, int r, int g, int b)
 	{
 		this.MOB_HP = mob_hp;
 		this.HERO_HP = hero_hp;
+		mob_paint = new Paint();
+		mob_paint.setARGB(200,r,g,b);
+		ColorFilter filter = new LightingColorFilter(mob_paint.getColor(), 1);
+		mob_paint.setColorFilter(filter);
 
 		int enemy_id = context.getResources().getIdentifier(name, "drawable", context.getPackageName());
 		MOB_IMG =  BitmapFactory.decodeResource(context.getResources(), enemy_id);
