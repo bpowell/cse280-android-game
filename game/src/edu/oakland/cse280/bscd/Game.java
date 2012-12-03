@@ -149,9 +149,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 				hero.setLocation(t.getHero());
 				map = new Map(context, t.getMap(), t.getHero());
 			}
-			else
+			else if(IS_FIGHTING)
 			{
 				IS_FIGHTING = check_fight;
+				fight.prepare_fight(fight_ui);
 			}
 		}
 

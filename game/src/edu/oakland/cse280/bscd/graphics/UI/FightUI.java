@@ -49,6 +49,8 @@ public class FightUI
 		MOB_HP = "00";
 		mob_paint = null;
 		MOB_IMG = null;
+
+		this.context = context;
 	}
 
 	public void setup_fight(String name, String mob_hp, String hero_hp)
@@ -96,9 +98,7 @@ public class FightUI
 
 		//Mob image
 		if(MOB_IMG != null)
-			canvas.drawBitmap(MOB_IMG, clip.left+ text_width + hp_offset,
-				clip.top + hp_offset, mob_paint);
-		
+			canvas.drawBitmap(MOB_IMG, clip.left+ text_width + hp_offset, clip.top + hp_offset, mob_paint);
 	}
 
 	public Rect getFIGHT_LOC()

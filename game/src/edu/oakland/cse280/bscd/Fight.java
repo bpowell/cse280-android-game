@@ -2,6 +2,8 @@ package edu.oakland.cse280.bscd;
 
 import edu.oakland.cse280.bscd.entities.EnemyMob;
 
+import edu.oakland.cse280.bscd.graphics.UI.FightUI;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -90,5 +92,11 @@ public class Fight
 		int who = r.nextInt(enemyMob.size());
 
 		return enemyMob.get(who);
+	}
+
+	public void prepare_fight(FightUI fightUI)
+	{
+		EnemyMob who = fight_who();
+		fightUI.setup_fight(who.getName(), Integer.toString(who.getHP()), "100");
 	}
 }
