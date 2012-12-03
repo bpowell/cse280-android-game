@@ -27,8 +27,9 @@ public final class R {
         public static final int hero=0x7f02000d;
         public static final int mayor=0x7f02000e;
         public static final int princess=0x7f02000f;
-        public static final int tiles=0x7f020010;
-        public static final int town=0x7f020011;
+        public static final int save_btn=0x7f020010;
+        public static final int tiles=0x7f020011;
+        public static final int town=0x7f020012;
     }
     public static final class id {
         public static final int cancelDelete=0x7f050003;

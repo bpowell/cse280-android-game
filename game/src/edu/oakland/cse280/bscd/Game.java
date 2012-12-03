@@ -170,6 +170,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			Rect a = ui_buttons.get_A();
 			Rect b = ui_buttons.get_B();
 
+            Rect s = ui_buttons.get_SAVE();
+
 			boolean check_fight = false;
 
 			Teleport t = null;
@@ -186,6 +188,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						t = ghero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 					else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 						t = ghero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+                    //else if(s.intersects(x,y,x+40,y+40))
+                        
 				
 					check_fight = fight.check_for_fight(map.getFight_chance());
 				}

@@ -19,6 +19,7 @@ public class UIButtons
 	private Bitmap dpad;
 	private Bitmap a_button;
 	private Bitmap b_button;
+    private Bitmap save_button;
 
 	private Rect dlef_loc;
 	private Rect drig_loc;
@@ -27,6 +28,8 @@ public class UIButtons
 
 	private Rect a_loc;
 	private Rect b_loc;
+
+    private Rect save_loc;
 
 	private Context context;
 
@@ -52,9 +55,12 @@ public class UIButtons
 		a_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-150, SCREEN_WIDTH-50, SCREEN_HEIGHT-130);
 		b_loc = new Rect(SCREEN_WIDTH-70, SCREEN_HEIGHT-70, SCREEN_WIDTH-50, SCREEN_HEIGHT-50);
 
+        save_loc = new Rect(SCREEN_WIDTH/2-20, SCREEN_HEIGHT - 50, SCREEN_WIDTH/2+20, SCREEN_HEIGHT - 10);
+
 		dpad = BitmapFactory.decodeResource(context.getResources(), R.drawable.dpad_part);
 		a_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.a_button);
 		b_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.b_button);
+        save_button = BitmapFactory.decodeResource(context.getResources(), R.drawable.save_btn);
 
 		opake = new Paint();
 		opake.setAlpha(200);
@@ -88,6 +94,10 @@ public class UIButtons
 		left = bounds.right-70;
 		top = bounds.bottom-70;
 		canvas.drawBitmap(b_button, left, top, opake);
+
+        left = bounds.left + ((bounds.right - bounds.left) / 2);
+        top = bounds.bottom - 50;
+        canvas.drawBitmap(save_button, left, top, opake);
 	}
 
 	public Rect get_DLEFT()
@@ -119,4 +129,9 @@ public class UIButtons
 	{
 		return b_loc;
 	}
+
+    public Rect get_SAVE()
+    {
+        return save_loc;
+    }
 }
