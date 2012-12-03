@@ -4,10 +4,11 @@ import edu.oakland.cse280.bscd.entities.Mob;
 import edu.oakland.cse280.bscd.models.Weapon;
 import edu.oakland.cse280.bscd.models.Armor;
 import java.lang.Math;
+import java.io.Serializable;
 
 import android.util.Log;
 
-public class Hero extends Mob
+public class Hero extends Mob implements Serializable
 {
 
     private int attack;
