@@ -63,17 +63,17 @@ public class LoadScreen extends Activity
             {
                 case 1:
                 {
-                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
+                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit(), h.getStrength(), h.getAttack(), h.getDefense(), h.getX(), h.getY(), h.getMap());
                     break;
                 }
                 case 2:
                 {
-                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
+                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit(), h.getStrength(), h.getAttack(), h.getDefense(), h.getX(), h.getY(), h.getMap());
                     break;
                 }
                 case 3:
                 {
-                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
+                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit(), h.getStrength(), h.getAttack(), h.getDefense(), h.getX(), h.getY(), h.getMap());
                     break;
                 }
             }
@@ -103,7 +103,7 @@ public class LoadScreen extends Activity
         hero1 = db.getHero(1);
         // print out database for debuggin purposes
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
-            .putExtra("hero", hero1);                      
+            .putExtra("hero", 1);                      
         startActivity(i);
         this.finish();
     }
@@ -115,7 +115,7 @@ public class LoadScreen extends Activity
             db.addHero(new Hero(2, "hero2", 1, 5, 10, 10, 10, 0, 0, "map02.txt"));
         hero2 = db.getHero(2);
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
-            .putExtra("hero", hero2);                      
+            .putExtra("hero", 2);                      
         startActivity(i);
         this.finish();
     }
@@ -127,7 +127,7 @@ public class LoadScreen extends Activity
             db.addHero(new Hero(3, "hero3", 1, 5, 10, 10, 10, 0, 0, "map02.txt"));
         hero3 = db.getHero(3);
         Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
-            .putExtra("hero", hero3);                      
+            .putExtra("hero", 3);                      
         startActivity(i);
         this.finish();
     }

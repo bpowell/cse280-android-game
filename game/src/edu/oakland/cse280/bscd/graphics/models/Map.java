@@ -203,4 +203,9 @@ public class Map
 	{
 		this.fight_chance = fight_chance;
 	}
+
+	public String getMapName()
+	{
+		return this.map_name;
+	}
 }

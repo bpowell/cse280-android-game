@@ -25,9 +25,9 @@ public class MainGameActivity extends Activity
 
 
         Bundle b = this.getIntent().getExtras();
-        hero = (Hero)b.get("hero");
+        Integer hero_number = (Integer)b.get("hero");
 
-		setContentView(new Game(this, hero));
+		setContentView(new Game(this, hero_number));
 	}
 
     @Override

@@ -43,22 +43,24 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private int SCREEN_HEIGHT;
 
 	private boolean IS_FIGHTING;
-	private boolean DEAD;
-	private boolean WIN;
 
-	public Game(Context context, Hero hero)
+	private DatabaseHandler db_handler;
+
+	public Game(Context context, int hero_number)
 	{
 		super(context);
 		getHolder().addCallback(this);
 
 		this.context = context;
+		db_handler = new DatabaseHandler(context);
 
 		fight_ui = new FightUI(context);
 
-		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
-        this.hero = hero;
+
+		this.hero = db_handler.getHero(hero_number);
+		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(hero.getX(), hero.getY(), hero.getX()+Settings.TOON_WIDTH, hero.getY()+Settings.TOON_HEIGHT));
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
-		map = new Map(context, "map02.txt", ghero.getLocation());
+		map = new Map(context, hero.getMap(), ghero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
@@ -170,7 +172,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			Rect a = ui_buttons.get_A();
 			Rect b = ui_buttons.get_B();
 
-            Rect s = ui_buttons.get_SAVE();
+			Rect s = ui_buttons.get_SAVE();
 
 			boolean check_fight = false;
 
@@ -188,9 +190,15 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						t = ghero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 					else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
 						t = ghero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
-                    //else if(s.intersects(x,y,x+40,y+40))
-                        
-				
+					else if(s.intersects(x,y,x+40,y+40))
+					{
+						hero.setMap(map.getMapName());
+						hero.setX(ghero.getLocation().left);
+						hero.setY(ghero.getLocation().top);
+						int qxc = db_handler.updateHero(hero);
+						Toast.makeText(context, "Your file is saved. " + qxc, Toast.LENGTH_LONG).show();
+					}
+
 					check_fight = fight.check_for_fight(map.getFight_chance());
 				}
 			}
