@@ -68,6 +68,12 @@ public class FightUI
 		MOB_IMG =  BitmapFactory.decodeResource(context.getResources(), enemy_id);
 	}
 
+	public void update(String mob_hp, String hero_hp)
+	{
+		this.MOB_HP = mob_hp;
+		this.HERO_HP = hero_hp;
+	}
+
 	public void draw(Canvas canvas)
 	{
 		Rect clip = canvas.getClipBounds();
