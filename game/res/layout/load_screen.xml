@@ -24,7 +24,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
-                android:textColor="#000"/>
+                android:textColor="#D8D8D8"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -45,7 +45,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
-                android:textColor="#000"/>
+                android:textColor="#D8D8D8"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -66,7 +66,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
-                android:textColor="#000"/>
+                android:textColor="#D8D8D8"/>
         </LinearLayout>
         <LinearLayout
             android:orientation="vertical"
@@ -87,7 +87,7 @@
                 android:textStyle="bold"
                 android:textSize="20sp"
                 android:paddingLeft="10dp"
-                android:textColor="#000"/>
+                android:textColor="#D8D8D8"/>
         </LinearLayout>
 
 
