@@ -46,7 +46,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private boolean DEAD;
 	private boolean WIN;
 
-	public Game(Context context)
+	public Game(Context context, Hero hero)
 	{
 		super(context);
 		getHolder().addCallback(this);
@@ -56,7 +56,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		fight_ui = new FightUI(context);
 
 		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
-		hero = new Hero(0, "Hero", 10, 10, 10, 10);
+        this.hero = hero;
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
 		map = new Map(context, "map02.txt", ghero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);

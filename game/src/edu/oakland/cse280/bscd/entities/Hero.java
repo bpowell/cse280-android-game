@@ -4,8 +4,11 @@ import edu.oakland.cse280.bscd.entities.Mob;
 import edu.oakland.cse280.bscd.models.Weapon;
 import edu.oakland.cse280.bscd.models.Armor;
 import java.lang.Math;
+import java.io.Serializable;
 
-public class Hero extends Mob
+import android.util.Log;
+
+public class Hero extends Mob implements Serializable
 {
 
     private int attack;
@@ -14,6 +17,8 @@ public class Hero extends Mob
     private int vit;
     private int hp;
     private int maxHP;
+    private int X;
+    private int Y;
     private boolean isAlive = true;
     private final int LEVEL_1 = 100;
     private final int LEVEL_2 = 200;
@@ -32,7 +37,7 @@ public class Hero extends Mob
     private int bootDefense = 0;
     private int level = 1;
 
-    public Hero(int id, String name, int strength, int attack, int defense, int vit)
+    public Hero(int id, String name, int level, int vit, int strength, int attack, int defense, int X, int Y)
     {
         super(id, name);
         this.strength = strength;
@@ -41,18 +46,15 @@ public class Hero extends Mob
         this.vit = vit;
         this.maxHP = vit * 10;
         this.hp = maxHP;
+        this.X = X;
+        this.Y = Y;
     }
     
-    public Hero(int id, String name, int level)
+    public Hero(int id, String name, int level, int vit)
     {
         super(id, name);
         this.level = level;
-    }
-
-    public Hero(String name, int level)
-    {
-        super.setName(name);
-        this.level = level;
+        this.vit = vit;
     }
 
     public Hero()
@@ -80,8 +82,9 @@ public class Hero extends Mob
 
     public void setVit(int v)
     {
-
-        this.vit = vit;
+        for(int i=0;i<10;i++)
+            Log.i("vit was set to ", ""+v);
+        this.vit = v;
     }
 
     public void setHP(int hp)
@@ -126,6 +129,18 @@ public class Hero extends Mob
         this.strength = weapon.getStrength();
     }
 
+    public void setX(int X)
+    {
+
+        this.X = X;
+    }
+
+    public void setY(int Y)
+    {
+
+        this.Y = Y;
+    }
+
     public int getAttack()
     {
 
@@ -148,6 +163,23 @@ public class Hero extends Mob
     {
 
         return this.level;
+    }
+
+    public int getVit()
+    {
+        return this.vit;
+    }
+
+    public int getX()
+    {
+
+        return this.X;
+    }
+
+    public int getY()
+    {
+
+        return this.Y;
     }
 
     public int doDamage(int min, int max, int enemyStrength)

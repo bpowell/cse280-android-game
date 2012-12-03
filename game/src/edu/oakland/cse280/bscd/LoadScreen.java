@@ -8,8 +8,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.TextView;
-
+import android.widget.Button;
 import java.util.List;
 
 import edu.oakland.cse280.bscd.DatabaseHandler;
@@ -36,6 +37,7 @@ public class LoadScreen extends Activity
         save3 = (TextView)findViewById(R.id.save3);
 
         db = new DatabaseHandler(this);
+
       //  if (db.getHerosCount() < 1) 
       //  {
       //      for(int i=0;i<100;i++)
@@ -45,6 +47,15 @@ public class LoadScreen extends Activity
       //    //  db.addHero(new Hero(3, "Johnny", 1));
       //  }
 
+
+
+    
+        this.update();
+
+	}
+
+    public void update()
+    {
         List<Hero> heros = db.getAllHeros();       
  
         for (Hero h : heros) {
@@ -52,29 +63,22 @@ public class LoadScreen extends Activity
             {
                 case 1:
                 {
-                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero1 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
                 case 2:
                 {
-                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero2 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
                 case 3:
                 {
-                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel());
+                    hero3 = new Hero(h.getId(), h.getName(), h.getLevel(), h.getVit());
                     break;
                 }
             }
 
-    }
-
-        this.update();
-
-	}
-
-    public void update()
-    {
+        }
         // diplay the save information on the buttons
         if(hero1 != null)
             save1.setText(hero1.getName()+"\r\nLevel: " + hero1.getLevel());
@@ -94,10 +98,12 @@ public class LoadScreen extends Activity
     public void save1(View view)
     {
         if(hero1 == null) // add a new hero to the database if it is a new game
-            db.addHero(new Hero(1, "hero1", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save1 ", "was Clicked");
-        Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(1, "hero1", 1, 5, 10, 10, 10, 0, 0));
+        hero1 = db.getHero(1);
+        // print out database for debuggin purposes
+        Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
+            .putExtra("hero", hero1);                      
         startActivity(i);
         this.finish();
     }
@@ -105,21 +111,23 @@ public class LoadScreen extends Activity
     public void save2(View view)
     {
         if(hero2 == null)// add a new hero to the database if it is a new game
-            db.addHero(new Hero(2, "hero2", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save2 ", "was Clicked");
-        Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(2, "hero2", 1, 5, 10, 10, 10, 0, 0));
+        hero2 = db.getHero(2);
+        Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
+            .putExtra("hero", hero2);                      
         startActivity(i);
         this.finish();
     }
 
     public void save3(View view)
-    { 
+    {
         if(hero3 == null)// add a new hero to the database if it is a new game
-            db.addHero(new Hero(3, "hero3", 1));
-        for(int i=0;i<10;i++)
-            Log.i("save3 ", "was Clicked");
-        Intent i = new Intent(LoadScreen.this, MainGameActivity.class);                      
+            //hero(id, name, level, vit, strength, attack, defense, X, Y)
+            db.addHero(new Hero(3, "hero3", 1, 5, 10, 10, 10, 0, 0));
+        hero3 = db.getHero(3);
+        Intent i = new Intent(LoadScreen.this, MainGameActivity.class)
+            .putExtra("hero", hero3);                      
         startActivity(i);
         this.finish();
     }
@@ -128,10 +136,66 @@ public class LoadScreen extends Activity
     {
         dialog = new Dialog(LoadScreen.this);
         dialog.setContentView(R.layout.delete);
-        dialog.setTitle("My Dialog");
+        dialog.setTitle("Select save to delete");
         dialog.setCancelable(true);
+
+        Button save1Delete = (Button) dialog.findViewById(R.id.save1Delete);
+        Button save2Delete = (Button) dialog.findViewById(R.id.save2Delete);
+        Button save3Delete = (Button) dialog.findViewById(R.id.save3Delete);
+        Button cancelDelete = (Button) dialog.findViewById(R.id.cancelDelete);
+
+        save1Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero1 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero1);
+                    hero1=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        save2Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero2 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero2);
+                    hero2=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        save3Delete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(hero3 == null)
+                    dialog.dismiss();
+                else
+                {
+                    db.deleteHero(hero3);
+                    hero3=null;
+                    dialog.dismiss();
+                    LoadScreen.this.update();
+                }
+        }
+        });
+
+        cancelDelete.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            dialog.dismiss();
+        }
+        });
         dialog.show();       
     }
 
-
-}
+} 
