@@ -39,13 +39,6 @@ public class NPC extends Mobs
 	public void draw(Canvas canvas)
 	{
 		Rect bounds = canvas.getClipBounds();
-
-		Paint font = new Paint();
-		font.setARGB(200, 255, 255, 255);
-		font.setTextSize(10);
-		if(is_talking)
-			canvas.drawText(speech, 10, 10, font);
-
 		super.draw(canvas);
 	}
 }
