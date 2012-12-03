@@ -94,9 +94,14 @@ public class Fight
 		return enemyMob.get(who);
 	}
 
-	public void prepare_fight(FightUI fightUI)
+	public EnemyMob prepare_fight(FightUI fightUI, int hero_hp)
 	{
 		EnemyMob who = fight_who();
-		fightUI.setup_fight(who.getName(), Integer.toString(who.getHP()), "100", who.getR(), who.getG(), who.getB());
+		fightUI.setup_fight(who.getName(), Integer.toString(who.getHP()), Integer.toString(hero_hp), who.getR(), who.getG(), who.getB());
+		return who;
+	}
+
+	public void update_fight(FightUI fightUI, EnemyMob mob, Hero hero)
+	{
 	}
 }
