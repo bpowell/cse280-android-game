@@ -1,6 +1,8 @@
 package edu.oakland.cse280.bscd;
 
-import edu.oakland.cse280.bscd.graphics.entities.Hero;
+import edu.oakland.cse280.bscd.graphics.entities.GHero;
+import edu.oakland.cse280.bscd.entities.Hero;
+import edu.oakland.cse280.bscd.entities.EnemyMob;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
 import edu.oakland.cse280.bscd.graphics.models.Map;
 import edu.oakland.cse280.bscd.graphics.models.Teleport;
@@ -25,7 +27,9 @@ import java.util.Random;
 public class Game extends SurfaceView implements SurfaceHolder.Callback
 {
 	private GameThread game_loop;
+	private GHero ghero;
 	private Hero hero;
+	private EnemyMob enemy;
 	private NPC mayor;
 	private Map map;
 	private MainQuest mainQuest;
@@ -48,9 +52,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 		fight_ui = new FightUI(context);
 
-		hero = new Hero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
+		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(0, 90, Settings.TOON_WIDTH, 2*Settings.TOON_HEIGHT));
+		hero = new Hero(0, "Hero", 10, 10, 10, 10);
 		mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
-		map = new Map(context, "map02.txt", hero.getLocation());
+		map = new Map(context, "map02.txt", ghero.getLocation());
 		mainQuest = new MainQuest("main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
@@ -132,13 +137,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 				synchronized(this)
 				{
 					if(dleft.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-						t = hero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+						t = ghero.move(-(Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_LEFT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 					else if(dright.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-						t = hero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+						t = ghero.move((Settings.TOON_WIDTH/4),0, Settings.TOON_FACE_RIGHT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 					else if(dtop.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-						t = hero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+						t = ghero.move(0,-(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_FRONT, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 					else if(dbottom.intersect(x,y,x+Settings.DPAD_SIZE,y+Settings.DPAD_SIZE))
-						t = hero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
+						t = ghero.move(0,(Settings.TOON_HEIGHT/4), Settings.TOON_FACE_BACK, map.getLoaded_tiles(), map.getNon_passable_tiles(), map.getTeleports());
 				
 					check_fight = fight.check_for_fight(map.getFight_chance());
 				}
@@ -146,13 +151,13 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 			if(t!=null)
 			{
-				hero.setLocation(t.getHero());
+				ghero.setLocation(t.getHero());
 				map = new Map(context, t.getMap(), t.getHero());
 			}
 			else if(check_fight)
 			{
 				IS_FIGHTING = check_fight;
-				fight.prepare_fight(fight_ui);
+				enemy = fight.prepare_fight(fight_ui, hero.getHP());
 			}
 		}
 
@@ -176,7 +181,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 			int top, left;
 
-			Rect hero_location = hero.getLocation();
+			Rect hero_location = ghero.getLocation();
 			Rect canvas_rect = canvas.getClipBounds();
 			int mwidth = map.getWidth();
 			int mheight = map.getHeight();
@@ -202,7 +207,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			map.draw(canvas);
 			mayor.draw(canvas);
 			ui_buttons.draw(canvas);
-			hero.draw(canvas);
+			ghero.draw(canvas);
 		}
 	}
 }
