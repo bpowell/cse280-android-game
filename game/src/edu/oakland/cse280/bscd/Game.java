@@ -135,7 +135,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						hero.doDamage(enemy.getMin(), enemy.getMax(), enemy.getStrength());
 						if(hero.getHP()<=0)
 						{
-							Toast.makeText(context, "You have died...", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "You have died...", Toast.LENGTH_SHORT).show();
 							IS_FIGHTING = false;
 						}
 						else 
@@ -143,7 +143,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 						if(enemy.getHP()<=0)
 						{
-							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_SHORT).show();
 							IS_FIGHTING = false;
 						}
 					}
@@ -152,7 +152,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						enemy.doDamage(1, 10, hero.getStrength());
 						if(enemy.getHP()<=0)
 						{
-							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "You have killed the enemy.", Toast.LENGTH_SHORT).show();
 							IS_FIGHTING = false;
 						}
 						else
@@ -160,7 +160,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 
 						if(hero.getHP()<=0)
 						{
-							Toast.makeText(context, "You have died...", Toast.LENGTH_LONG).show();
+							Toast.makeText(context, "You have died...", Toast.LENGTH_SHORT).show();
 							IS_FIGHTING = false;
 						}
 					}
