@@ -13,6 +13,6 @@ public class NPCHelper
 		tmp.left -= offset;
 		tmp.right += offset;
 
-		return tmp.intersects(npc);
+		return Rect.intersects(hero,npc);
 	}
 }
