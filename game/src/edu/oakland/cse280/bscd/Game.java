@@ -213,6 +213,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						Toast.makeText(context, "A Button Pressed.", Toast.LENGTH_LONG).show();
 						//Loop over all NPCs loaded in current map
 						//  boolean near_npc = npc_helper.near_npc();
+						//  if near main_quest guy, do start_quest
 					}
 					else if(b.intersects(x,y,x+40,y+40))
 					{
