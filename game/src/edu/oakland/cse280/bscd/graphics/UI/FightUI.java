@@ -101,7 +101,7 @@ public class FightUI
 		canvas.drawText(RUN, RUN_LOC.left, RUN_LOC.top, text_style);
 
 		//HP
-		int hp_offset = 10;
+		int hp_offset = 20;
 		canvas.drawText(HP, 0,0, text_style);
 		canvas.drawText(MOB_HP, clip.left + hp_offset, 
 				clip.top + hp_offset, text_style);
