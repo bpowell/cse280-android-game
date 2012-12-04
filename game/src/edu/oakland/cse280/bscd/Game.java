@@ -4,6 +4,7 @@ import edu.oakland.cse280.bscd.graphics.entities.GHero;
 import edu.oakland.cse280.bscd.entities.Hero;
 import edu.oakland.cse280.bscd.entities.EnemyMob;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
+import edu.oakland.cse280.bscd.graphics.entities.NPCHelper;
 import edu.oakland.cse280.bscd.graphics.models.Mapp;
 import edu.oakland.cse280.bscd.graphics.models.Teleport;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
@@ -39,7 +40,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private UIButtons ui_buttons;
 	private FightUI fight_ui;
 	private Fight fight;
-	private Map<String, ArrayList<NPC>> npcs;
+	private Map<String, NPC> npcs;
+	private NPCHelper npc_helper;
 
 	private Context context;
 	private int SCREEN_WDITH;
@@ -57,18 +59,17 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		this.context = context;
 		db_handler = new DatabaseHandler(context);
 		fight_ui = new FightUI(context);
-		npcs = new HashMap<String, ArrayList<NPC>>();
+		npcs = new HashMap<String, NPC>();
+		npc_helper = new NPCHelper();
 		this.hero = db_handler.getHero(hero_number);
 
 		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(hero.getX(), hero.getY(), hero.getX()+Settings.TOON_WIDTH, hero.getY()+Settings.TOON_HEIGHT));
 
 		NPC mayor = new NPC(BitmapFactory.decodeResource(getResources(), R.drawable.mayor), 0, new Rect(18*90, 2*90, 18*90+Settings.TOON_WIDTH, 2*90+Settings.TOON_HEIGHT));
-		ArrayList<NPC> n = new ArrayList<NPC>();
-		n.add(mayor);
-		npcs.put("map02.txt", n);
+		npcs.put("map02.txt", mayor);
 
 		map = new Mapp(context, hero.getMap(), ghero.getLocation());
-		mainQuest = new MainQuest("main quest", 0, mayor);
+		mainQuest = new MainQuest(context, "main quest", 0, mayor);
 		ui_buttons = new UIButtons(context);
 		setFocusable(true);
 		fight = new Fight(context);
@@ -203,7 +204,19 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						hero.setX(ghero.getLocation().left);
 						hero.setY(ghero.getLocation().top);
 						int qxc = db_handler.updateHero(hero);
-						Toast.makeText(context, "Your file is saved. " + qxc, Toast.LENGTH_LONG).show();
+						Toast.makeText(context, "Your file is saved.", Toast.LENGTH_LONG).show();
+					}
+					else if(a.intersects(x,y,x+40,y+40))
+					{
+						//Loop over all NPCs loaded in current map
+						//  boolean near_npc = npc_helper.near_npc();
+						//  if near main_quest guy, do start_quest
+                        NPC n = npcs.get(map.getMapName());
+                        if(npc_helper.near_npc(ghero.getLocation(), n.getLocation()))
+                        {
+                            mainQuest.start_quest();
+                            mainQuest.part1();
+                        }
 					}
 
 					check_fight = fight.check_for_fight(map.getFight_chance());
@@ -266,6 +279,10 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			canvas.translate(left, top);
 
 			map.draw(canvas);
+
+            NPC n = npcs.get(map.getMapName());
+            n.draw(canvas);
+
 			ui_buttons.draw(canvas);
 			ghero.draw(canvas);
 		}
