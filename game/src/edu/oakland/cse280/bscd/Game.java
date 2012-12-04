@@ -203,7 +203,16 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 						hero.setX(ghero.getLocation().left);
 						hero.setY(ghero.getLocation().top);
 						int qxc = db_handler.updateHero(hero);
-						Toast.makeText(context, "Your file is saved. " + qxc, Toast.LENGTH_LONG).show();
+						Toast.makeText(context, "Your file is saved.", Toast.LENGTH_LONG).show();
+					}
+					else if(a.intersects(x,y,x+40,y+40))
+					{
+						Toast.makeText(context, "A Button Pressed.", Toast.LENGTH_LONG).show();
+						//check_for_npc();
+					}
+					else if(b.intersects(x,y,x+40,y+40))
+					{
+						Toast.makeText(context, "B Button Pressed.",Toast.LENGTH_LONG).show();
 					}
 
 					check_fight = fight.check_for_fight(map.getFight_chance());
