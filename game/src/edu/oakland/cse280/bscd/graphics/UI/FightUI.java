@@ -103,14 +103,14 @@ public class FightUI
 		//HP
 		int hp_offset = 20;
 		canvas.drawText(HP, 0,0, text_style);
-		canvas.drawText(MOB_HP, clip.left + hp_offset, 
+		canvas.drawText("Enemy HP: " + MOB_HP, clip.left + hp_offset, 
 				clip.top + hp_offset, text_style);
-		canvas.drawText(HERO_HP, clip.left + hp_offset,
-				clip.top + 2 * text_height, text_style);
+		canvas.drawText("Your HP: " + HERO_HP, clip.left + hp_offset,
+				FIGHT_LOC.top -( 2 * text_height ), text_style);
 
 		//Mob image
 		if(MOB_IMG != null)
-			canvas.drawBitmap(MOB_IMG, clip.left+ text_width + hp_offset, clip.top + hp_offset, mob_paint);
+			canvas.drawBitmap(MOB_IMG, clip.left + 2 * text_width + hp_offset, clip.top + 2 * hp_offset, mob_paint);
 	}
 
 	public Rect getFIGHT_LOC()
