@@ -4,6 +4,7 @@ import edu.oakland.cse280.bscd.graphics.entities.GHero;
 import edu.oakland.cse280.bscd.entities.Hero;
 import edu.oakland.cse280.bscd.entities.EnemyMob;
 import edu.oakland.cse280.bscd.graphics.entities.NPC;
+import edu.oakland.cse280.bscd.graphics.entities.NPCHelper;
 import edu.oakland.cse280.bscd.graphics.models.Mapp;
 import edu.oakland.cse280.bscd.graphics.models.Teleport;
 import edu.oakland.cse280.bscd.graphics.UI.UIButtons;
@@ -40,6 +41,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 	private FightUI fight_ui;
 	private Fight fight;
 	private Map<String, ArrayList<NPC>> npcs;
+	private NPCHelper npc_helper;
 
 	private Context context;
 	private int SCREEN_WDITH;
@@ -58,6 +60,7 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 		db_handler = new DatabaseHandler(context);
 		fight_ui = new FightUI(context);
 		npcs = new HashMap<String, ArrayList<NPC>>();
+		npc_helper = new NPCHelper();
 		this.hero = db_handler.getHero(hero_number);
 
 		ghero = new GHero(BitmapFactory.decodeResource(getResources(), R.drawable.hero), 0, new Rect(hero.getX(), hero.getY(), hero.getX()+Settings.TOON_WIDTH, hero.getY()+Settings.TOON_HEIGHT));
@@ -208,7 +211,8 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 					else if(a.intersects(x,y,x+40,y+40))
 					{
 						Toast.makeText(context, "A Button Pressed.", Toast.LENGTH_LONG).show();
-						//check_for_npc();
+						//Loop over all NPCs loaded in current map
+						//  boolean near_npc = npc_helper.near_npc();
 					}
 					else if(b.intersects(x,y,x+40,y+40))
 					{
