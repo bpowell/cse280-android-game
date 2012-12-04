@@ -266,11 +266,6 @@ public class Game extends SurfaceView implements SurfaceHolder.Callback
 			canvas.translate(left, top);
 
 			map.draw(canvas);
-
-			ArrayList n = npcs.get(map.getMap());
-			for( NPC npc: n )
-				npc.draw(canvas);
-
 			ui_buttons.draw(canvas);
 			ghero.draw(canvas);
 		}
